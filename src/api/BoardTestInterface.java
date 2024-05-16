@@ -16,8 +16,5 @@ public interface BoardTestInterface {
     int getrows();//gibt die Anzahl der Reihen
     int getWhoHasWon(); //0: niemand     1: Spieler1     2:Spieler2
     boolean getIsFull(); // gibt den Status ob das Spielfeld voll ist wieder
-
-    
-    
     // sagt uns falls ihr noch was braucht
 }

@@ -50,13 +50,14 @@ public class Board implements BoardInterface,BoardTestInterface {
 
     @Override
     public void changePlayer() {
-        // TODO eine Methode, die den Spieler wechselt
+        this.setTurn(!(this.getTurn()));
     }
 
     @Override
     public void placeStone(int column) {
         // TODO eine Methode, die einen Stein an die richtige Stelle setzt
-        //  this.checkStatus(1);
+        this.checkStatus(column);
+        this.changePlayer();
     }
    
    int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
