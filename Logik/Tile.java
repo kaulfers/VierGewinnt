@@ -6,6 +6,9 @@ public class Tile { // Das ist die Kachel, also das wo dich "Chips" reinfallen
     Tile(int s){
         status = s;
     }
+    Tile(){
+        status = 0;
+    }
 
     void setStatus(int s){
         status = s;

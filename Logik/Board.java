@@ -5,19 +5,39 @@ import api.BoardTestInterface;
 
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
-    Tile[][] board; // das Spielfeld
+    Tile[][] board; // das Spielfeld 	//Array[rows][columns]
     int whoHasWon; //0: niemand     1: Spieler1     2:Spieler2
-    boolean isfull; // wenn das Spielfeld voll ist und keiner gewonnen hat
+    boolean isFull; // wenn das Spielfeld voll ist und keiner gewonnen hat
 
-    //TODO Konstruktoren
+    //vollständiger Konstruktor
+    Board(boolean iP1T, int columns, int rows, int wHW, boolean iF){
+        isPlayer1sTurn = iP1T;
+        board = new Tile[rows][columns];
+        whoHasWon = wHW;
+        isFull = iF;
+    }
+    // legt nur die Größe fest
+    Board(int columns, int rows){
+        isPlayer1sTurn = true;
+        board = new Tile[rows][columns];
+        whoHasWon = 0;
+        isFull = false;
+    }
+    // Standard Konstruktor, macht das Spielfeld in normaler Größe
+    Board(){
+        isPlayer1sTurn = true;
+        board = new Tile[6][7];
+        whoHasWon = 0;
+        isFull = false;
+    }
 
     //TODO Setter und Getter
 
     @Override
     public void checkStatus(int column) {
-        // TODO eine Methode die check wie der Status vom Spiel ist ung ggf. anpasst
+        // TODO eine Methode die checkt wie der Status vom Spiel ist und ggf. anpasst
         isWon(column);
-        isfull();
+        isFull();
    }
 
    void isWon(int column){
@@ -39,4 +59,8 @@ public class Board implements BoardInterface,BoardTestInterface {
         //  this.checkStatus(1);
     }
    
+   int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
+
+   }
+
 }
