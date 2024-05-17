@@ -9,3 +9,4 @@ Für push kleine Tips:
     - sprecht die Arbeitsaufteilung intern ab  
 
 ### Bei wem kann ich die Englisch-Hausaufgaben abschreiben?
+Wir finden dich - Das Management
