@@ -10,4 +10,4 @@ Für push kleine Tips:
 
 ### Bei wem kann ich die Englisch-Hausaufgaben abschreiben?
 Wir finden dich
-    - Das Management
+- Das Management
