@@ -1,8 +1,8 @@
-package Logik;
+package logic;
 
-import src.api.BoardInterface;
-import src.api.BoardTestInterface;
-
+import api.BoardInterface;
+import api.BoardTestInterface;
+//TODO restliche Interface-Methoden implementieren
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
     Tile[][] board; // das Spielfeld 	//Array[rows][columns]

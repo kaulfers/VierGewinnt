@@ -1,6 +1,6 @@
 package api;
 
-import Logik.*;
+import logic.*;
 
 public interface BoardTestInterface {
     void placeStone(int column); // diese Methode legt einen Stein, überprüft den Status und wechselt den Spieler

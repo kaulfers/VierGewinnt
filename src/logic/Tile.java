@@ -1,4 +1,4 @@
-package Logik;
+package logic;
 
 public class Tile { // Das ist die Kachel, also das wo dich "Chips" reinfallen
     int status; //0:leer 1:Spieler1 2:Spieler2
