@@ -1,7 +1,7 @@
 package Logik;
 
-import api.BoardInterface;
-import api.BoardTestInterface;
+import src.api.BoardInterface;
+import src.api.BoardTestInterface;
 
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
