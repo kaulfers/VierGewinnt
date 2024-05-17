@@ -1,5 +1,7 @@
 package api;
 
+import Logik.*;
+
 public interface BoardTestInterface {
     void placeStone(int column); // diese Methode legt einen Stein, überprüft den Status und wechselt den Spieler
     void checkStatus(int column); // überprüft den Status des Spiels, ob gewonnen oder voll
