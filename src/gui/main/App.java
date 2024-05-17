@@ -1,11 +1,13 @@
-package main;
+package gui.main;
+
+import gui.frames.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Entry point for the application.
- * This class sets up the main JFrame to display the MainFrame JPanel, which contains the game interface.
+ * This class sets up the gui.frames JFrame to display the MainFrame JPanel, which contains the game interface.
  * ITS CURRENTLY UNDER CONSTRUCTION.
  */
 public class App {
