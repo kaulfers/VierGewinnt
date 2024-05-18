@@ -40,17 +40,73 @@ public class Board implements BoardInterface,BoardTestInterface {
         isFull();
    }
 
-   void isWon(int column){
+    void isWon(int column){
+        int actualRow = isTopOfColumn(column);
+        int player = board[actualRow][column].status;
 
-   }
+        if (player !=0){
+            //Diagonal
+            if (count(player, actualRow, column, 1, 1) + count(player, actualRow, column, -1, -1) + 1 >= 4){
+                whoHasWon=player;
+            }
+            //Diagonal
+            else if (count(player, actualRow, column, -1, 1) + count(player, actualRow, column, 1, -1) + 1 >= 4){
+                whoHasWon=player;
+            }
+            //Horizontal
+            else if (count(player, actualRow, column, 0, 1) + count(player, actualRow, column, 0, -1) + 1 >= 4){
+                whoHasWon=player;
+            }
+            //Vertical
+            else if (count(player, actualRow, column, 1, 0) + count(player, actualRow, column, -1, 0) + 1 >= 4){
+                whoHasWon=player;
+            }
+        }
+    }
 
-   void isFull(){
+    //An auxiliary Function to help the method "void isWon(int column)""
+    int count(int player, int rowToCheck, int columnToCheck, int rowDirection, int columnDirection){
+        int numberOfRows = board.length;
+        int numberOfColumns = board[0].length;
+        int count = 0;
+        while (true)
+        {
+            rowToCheck += rowDirection;
+            columnToCheck += columnDirection;
+            if (rowToCheck < 0 || columnToCheck < 0 || rowToCheck >= numberOfRows || columnToCheck >= numberOfColumns)
+                break;
+            if (board[rowToCheck][columnToCheck].status == player)
+                count++;
+            else
+                break;
+        }
+        return count;
+    }
 
-   }
+    void isFull(){
+        int numberOfRows=board.length;
+        int numberOfColumns = board[0].length;
+        for (int row= 0; row < numberOfRows; row++){
+            for (int column=0; column < numberOfColumns; column++){
+                if (board[row][column].status==0){
+                    this.isFull=false;
+                    return;
+                }
+            }
+        }
+        isFull=true;
+    }
 
     @Override
     public void changePlayer() {
         this.setTurn(!(this.getTurn()));
+    }
+
+    @Override
+    public void placeStone(int column) {
+        // TODO eine Methode, die einen Stein an die richtige Stelle setzt
+        this.checkStatus(column);
+        this.changePlayer();
     }
 
     @Override
@@ -84,44 +140,37 @@ public class Board implements BoardInterface,BoardTestInterface {
     }
 
     @Override
-    public boolean getTurn() {
-        return false;
+    public boolean getTurn(){
+        return this.isPlayer1sTurn;
     }
 
     @Override
-    public Tile[][] getBoard() {
-        return new Tile[0][];
+    public Tile[][] getBoard(){
+        return this.board;
     }
 
     @Override
-    public int getColumns() {
+    public int getrows(){
+        return board.length;
+    }
+
+    @Override
+    public int getColumns(){
+        return board[0].length;
+    }
+
+    @Override
+    public boolean getIsFull(){
+        return this.isFull;
+    }
+
+    @Override
+    public int getWhoHasWon(){
+        return this.whoHasWon;
+    }
+
+    int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
         return 0;
     }
-
-    @Override
-    public int getrows() {
-        return 0;
-    }
-
-    @Override
-    public int getWhoHasWon() {
-        return 0;
-    }
-
-    @Override
-    public boolean getIsFull() {
-        return false;
-    }
-
-    @Override
-    public void placeStone(int column) {
-        // TODO eine Methode, die einen Stein an die richtige Stelle setzt
-        this.checkStatus(column);
-        this.changePlayer();
-    }
-   
-   int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
-        return 0;
-   }
 
 }
