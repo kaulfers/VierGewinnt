@@ -6,7 +6,8 @@ game of the year
 
 ### entry point: src/gui/main/App.java idk if it works
 
-Für push kleine Tips:  
+Für Push:  
+    - macht bitte einen Test des Codes bevor er gepusht wird (wenn er nicht funktioniert dann als Pull Request)
     - achtet darauf keine Ordner zu verschieben und keine Interfaces abzuändern  
     - sprecht die Arbeitsaufteilung intern ab  
 
