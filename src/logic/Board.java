@@ -54,6 +54,66 @@ public class Board implements BoardInterface,BoardTestInterface {
     }
 
     @Override
+    public void setTurn(boolean player1sTurn) {
+
+    }
+
+    @Override
+    public void setBoard(Tile[][] board) {
+
+    }
+
+    @Override
+    public void setColumns(int columns) {
+
+    }
+
+    @Override
+    public void setrows(int rows) {
+
+    }
+
+    @Override
+    public void setWhoHasWon(int whoWon) {
+
+    }
+
+    @Override
+    public void setIsFull(boolean isFull) {
+
+    }
+
+    @Override
+    public boolean getTurn() {
+        return false;
+    }
+
+    @Override
+    public Tile[][] getBoard() {
+        return new Tile[0][];
+    }
+
+    @Override
+    public int getColumns() {
+        return 0;
+    }
+
+    @Override
+    public int getrows() {
+        return 0;
+    }
+
+    @Override
+    public int getWhoHasWon() {
+        return 0;
+    }
+
+    @Override
+    public boolean getIsFull() {
+        return false;
+    }
+
+    @Override
     public void placeStone(int column) {
         // TODO eine Methode, die einen Stein an die richtige Stelle setzt
         this.checkStatus(column);
@@ -61,7 +121,7 @@ public class Board implements BoardInterface,BoardTestInterface {
     }
    
    int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
-
+        return 0;
    }
 
 }

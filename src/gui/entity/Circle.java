@@ -3,40 +3,28 @@ package gui.entity;
 import java.awt.*;
 
 public class Circle {
-    private int xCoordinate;
-    private int yCoordinate;
-    private int radius;
+    private final int ID;
+    private final int X_COORDINATES;
+    private final int Y_COORDINATES;
     private Color color;
 
-    public Circle(int xCoordinate, int yCoordinate, int radius, Color color) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
-        this.radius = radius;
+    public Circle(int ID, int X_COORDINATES, int Y_COORDINATES, Color color) {
+        this.ID = ID;
+        this.X_COORDINATES = X_COORDINATES;
+        this.Y_COORDINATES = Y_COORDINATES;
         this.color = color;
     }
 
-    public int getXCoordinate() {
-        return xCoordinate;
+    public int getID() {
+        return ID;
     }
 
-    public void setXCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
+    public int getXCoordinate() {
+        return X_COORDINATES;
     }
 
     public int getYCoordinate() {
-        return yCoordinate;
-    }
-
-    public void setYCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
-    }
-
-    public int getRadius() {
-        return radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
+        return Y_COORDINATES;
     }
 
     public Color getColor() {
