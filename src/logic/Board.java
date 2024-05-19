@@ -2,7 +2,7 @@ package logic;
 
 import api.BoardInterface;
 import api.BoardTestInterface;
-//TODO restliche Interface-Methoden implementieren
+
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
     Tile[][] board; // das Spielfeld 	//Array[rows][columns]
@@ -31,14 +31,12 @@ public class Board implements BoardInterface,BoardTestInterface {
         isFull = false;
     }
 
-    //TODO Setter und Getter
-
     @Override
     public void checkStatus(int column) {
-        // TODO eine Methode die checkt wie der Status vom Spiel ist und ggf. anpasst
+        //eine Methode die checkt wie der Status vom Spiel ist und ggf. anpasst
         isWon(column);
         isFull();
-   }
+    }
 
     void isWon(int column){
         int actualRow = isTopOfColumn(column);
@@ -102,26 +100,68 @@ public class Board implements BoardInterface,BoardTestInterface {
         this.setTurn(!(this.getTurn()));
     }
 
+    /**
+    *   Platziert einen Stein des aktuellen Spielers in die angegebene Spalte.
+    *   Diese Methode überprüft zuerst, ob die Spalte voll ist.
+    *   Wenn nicht, wird der Stein in die oberste leere Position der Spalte platziert.
+    *   Dann wird der Spielstatus überprüft und der Spieler gewechselt.
+    *   @param column Die Spalte, in die der Stein platziert werden soll.
+    *   @throws IllegalArgumentException Wenn die Spalte voll ist.
+    */
+
     @Override
     public void placeStone(int column) {
-        // TODO eine Methode, die einen Stein an die richtige Stelle setzt
-        this.checkStatus(column);
-        this.changePlayer();
+        int row = isTopOfColumn(column);
+        if (row == -1) {
+            throw new IllegalArgumentException("Column is full");}
+        if (isPlayer1sTurn) {
+            board[row][column] = new Tile(1); // Spieler 1
+        } else {
+            board[row][column] = new Tile(2); // Spieler 2
+        }
+        checkStatus(column);
+        changePlayer();
     }
 
+    /**
+    *    Gibt die Reihe des obersten Steins einer Spalte zurück.
+    *    @param column Die Spalte, für die die oberste Reihe zurückgegeben werden soll.
+    *    @return Die Reihe des obersten Steins in der Spalte, oder -1, wenn die Spalte voll ist.
+    */
+    int isTopOfColumn(int column) {
+        for (int row = board.length - 1; row >= 0; row--) {
+            if (board[row][column] == null || board[row][column].isEmpty()) {
+                return row;
+            }
+        }
+        return -1; // Spalte ist voll
+    }
+
+    /** 
+    *   Setzt den Spieler, der am Zug ist.
+    *   @param player1sTurn True, wenn Spieler eins am Zug ist, ansonsten False.
+    */
     @Override
     public void setTurn(boolean player1sTurn) {
-
+        this.isPlayer1sTurn = player1sTurn;
     }
 
+    /**
+    *   Setzt das Spielfeld mit einer neuen Matrix von Kacheln.
+    *   @param board Die neue Matrix von Kacheln für das Spielfeld.
+    */
     @Override
     public void setBoard(Tile[][] board) {
-
+        this.board = board;
     }
 
+    /**  
+    *   Setzt die Anzahl der Spalten des Spielfelds.
+    *   @param columns Die neue Anzahl der Spalten.
+    */
     @Override
-    public void setColumns(int columns) {
-
+    public void setColumns(int columns) {// Hier kann zusätzliche Logik implementiert werden, um das Spielfeld entsprechend der Anzahl der Spalten anzupassen
+        this.board = new Tile[this.board.length][columns];
     }
 
     @Override
@@ -129,16 +169,35 @@ public class Board implements BoardInterface,BoardTestInterface {
 
     }
 
+    /**
+    *    Setzt die Anzahl der Reihen des Spielfelds.
+    *    @param rows Die neue Anzahl der Reihen.
+    */
+
+    /*
+    @Override
+    public void setRows(int rows) {// Hier kann zusätzliche Logik implementiert werden, um das Spielfeld entsprechend der Anzahl der Reihen anzupassen
+        this.board = new Tile[rows][this.board[0].length];
+    }*/
+
+    /**     
+    *    Setzt den Status, wer das Spiel gewonnen hat.
+    *    @param whoWon Der Status, wer das Spiel gewonnen hat (0 für niemand, 1 für Spieler1, 2 für Spieler2).
+    */
     @Override
     public void setWhoHasWon(int whoWon) {
-
+        this.whoHasWon = whoWon;
     }
 
+    /**
+    *    Setzt den Status, ob das Spielfeld voll ist oder nicht.
+    *   @param isFull True, wenn das Spielfeld voll ist, ansonsten False.
+    */
     @Override
     public void setIsFull(boolean isFull) {
-
-    }
-
+        this.isFull = isFull;
+    }    
+    
     @Override
     public boolean getTurn(){
         return this.isPlayer1sTurn;
@@ -168,9 +227,4 @@ public class Board implements BoardInterface,BoardTestInterface {
     public int getWhoHasWon(){
         return this.whoHasWon;
     }
-
-    int isTopOfColumn(int column){ // gibt die reihe des obersten Steins einer Spalte wieder.
-        return 0;
-    }
-
 }

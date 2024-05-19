@@ -13,6 +13,8 @@ import java.util.Random;
  * Represents the gui.main frame of the game application.
  * This JPanel displays the game interface, including the game board and user interaction elements.
  * TODO: get rid of "(int) SCREEN_WIDTH / 3;"
+ *
+ * @author Konrad
  */
 public class MainFrame extends JPanel {
     private final int SCREEN_WIDTH = 1300;
@@ -32,8 +34,13 @@ public class MainFrame extends JPanel {
     private boolean turnPlayer1 = true;
 
     private final ArrayList<Circle> CIRCLES = new ArrayList<>();
-    private final ArrayList<BordersForCircle> BORDER_CIRCLES_PLAYER_1 = new ArrayList<>();
-    private final ArrayList<BordersForCircle> BORDER_CIRCLES_PLAYER_2 = new ArrayList<>();
+    private final ArrayList<BordersForCircle> STORAGE_CIRCLES_PLAYER_1 = new ArrayList<>();
+    private final ArrayList<BordersForCircle> STORAGE_CIRCLES_PLAYER_2 = new ArrayList<>();
+
+    final private int BUTTON_WIDTH = 100;
+    final private int BUTTON_HEIGHT = 30;
+    final private int BUTTON_X_POSITION = SCREEN_WIDTH - BUTTON_WIDTH - 30;
+    final private int BUTTON_Y_POSITION = 25;
 
     public MainFrame() {
         X_COUNT_OF_CIRCLES = 7;
@@ -41,10 +48,9 @@ public class MainFrame extends JPanel {
 
         initializeCircles();
         calculateAmountOfCirclesForEachPlayer();
-
         createLocationsOfCirclesInsideOfStorageBox();
 
-        this.setBackground(new Color(215, 246, 218, 255));
+        this.setBackground(new Color(243, 234, 255, 255));
         this.addMouseListener(new MouseHandler(this));
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
@@ -61,16 +67,12 @@ public class MainFrame extends JPanel {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
         renderGameBoard(graphics2D);
-        //renderInteractiveBoard(graphics2D);
-
         renderGameElements(graphics2D);
-
-        //drawMiddleLines(graphics2D);
-
         renderCircleInStorage(graphics2D);
-
         drawTextLabel(graphics2D, "left", "Player 1");
         drawTextLabel(graphics2D, "right", "Player 2");
+        renderPlayersTurnText(graphics2D);
+        renderSettingsButton(graphics2D);
 
         graphics2D.dispose();
     }
@@ -98,7 +100,7 @@ public class MainFrame extends JPanel {
             xOfCircle = random.nextInt((xOfBox - WIDTH_OF_BOX / 2), (xOfBox + WIDTH_OF_BOX / 2));
             yOfCircle = random.nextInt((Y_OF_BOX - HEIGHT_OF_BOX / 2), (Y_OF_BOX + HEIGHT_OF_BOX / 2));
 
-            BORDER_CIRCLES_PLAYER_1.add(new BordersForCircle(i, xOfCircle, yOfCircle, COLOR_PLAYER_1, 2));
+            STORAGE_CIRCLES_PLAYER_1.add(new BordersForCircle(i, xOfCircle, yOfCircle, COLOR_PLAYER_1, 2));
         }
 
         // Render circles for Player 2's storage area
@@ -111,13 +113,50 @@ public class MainFrame extends JPanel {
             xOfCircle = random.nextInt((xOfBox - WIDTH_OF_BOX / 2), (xOfBox + WIDTH_OF_BOX / 2));
             yOfCircle = random.nextInt((Y_OF_BOX - HEIGHT_OF_BOX / 2), (Y_OF_BOX + HEIGHT_OF_BOX / 2));
 
-            BORDER_CIRCLES_PLAYER_2.add(new BordersForCircle(i, xOfCircle, yOfCircle, COLOR_PLAYER_2, 2));
+            STORAGE_CIRCLES_PLAYER_2.add(new BordersForCircle(i, xOfCircle, yOfCircle, COLOR_PLAYER_2, 2));
         }
     }
 
+    /**
+     * Renders the text indicating the current player's turn on the game board.
+     * The text displays either "Player 1's turn" or "Player 2's turn" based on the current turn.
+     *
+     * @param graphics2D The Graphics2D object used for rendering the text.
+     */
+
+    private void renderPlayersTurnText(Graphics2D graphics2D) {
+        final int Y_POSITION = 100;
+        final String TEXT = turnPlayer1 ? "Player 1's turn" : "Player 2's turn";
+        final int FONT_SIZE = 32; // Choose the desired font size
+
+        // Set the font size
+        Font originalFont = graphics2D.getFont();
+        graphics2D.setFont(new Font(originalFont.getName(), Font.BOLD, FONT_SIZE));
+
+        // Get the width of the text
+        FontMetrics fontMetrics = graphics2D.getFontMetrics();
+        int textWidth = fontMetrics.stringWidth(TEXT);
+
+        // Calculate the X position to center the text horizontally
+        int X_POSITION = (SCREEN_WIDTH - textWidth) / 2;
+
+        // Draw the text at the calculated position
+        graphics2D.drawString(TEXT, X_POSITION, Y_POSITION);
+
+        // Restore the original font
+        graphics2D.setFont(originalFont);
+    }
+
+
+    /**
+     * Renders circles in the storage area for both Player 1 and Player 2.
+     * Circles are drawn with borders and filled with specified colors.
+     *
+     * @param graphics2D The Graphics2D object used for rendering.
+     */
     private void renderCircleInStorage(Graphics2D graphics2D) {
         // Render circles for Player 1's storage area
-        for (BordersForCircle border: BORDER_CIRCLES_PLAYER_1) {
+        for (BordersForCircle border: STORAGE_CIRCLES_PLAYER_1) {
             // Draw the circle border for Player 1's storage area
             graphics2D.setColor(new Color(6, 71, 151));
             graphics2D.fillOval(border.getXCoordinate(), border.getYCoordinate(), RADIUS_CYCLE + border.getBORDER_PADDING(), RADIUS_CYCLE + border.getBORDER_PADDING());
@@ -125,7 +164,7 @@ public class MainFrame extends JPanel {
         }
 
         // Render circles for Player 2's storage area
-        for (BordersForCircle border: BORDER_CIRCLES_PLAYER_2) {
+        for (BordersForCircle border: STORAGE_CIRCLES_PLAYER_2) {
             // Draw the circle border for Player 1's storage area
             graphics2D.setColor(new Color(165, 17, 17));
             graphics2D.fillOval(border.getXCoordinate(), border.getYCoordinate(), RADIUS_CYCLE + border.getBORDER_PADDING(), RADIUS_CYCLE + border.getBORDER_PADDING());
@@ -150,19 +189,50 @@ public class MainFrame extends JPanel {
     }
 
     /**
-     * For GUI Developers. will be deleted.
+     * Renders a settings button with specified text.
      *
+     * @param graphics2D The Graphics2D object used for rendering.
      */
-    private void drawMiddleLines(Graphics2D graphics2D) {
+    private void renderSettingsButton(Graphics2D graphics2D) {
+        final String BUTTON_TEXT = "Optionen";
+
+        graphics2D.setColor(Color.WHITE);
+        graphics2D.fillRoundRect(BUTTON_X_POSITION, BUTTON_Y_POSITION, BUTTON_WIDTH, BUTTON_HEIGHT, 30, 30);
+
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 15));
+        FontMetrics fontMetrics = graphics2D.getFontMetrics();
+        final int TEXT_WIDTH = fontMetrics.stringWidth(BUTTON_TEXT);
+        final int TEXT_X = BUTTON_X_POSITION + (BUTTON_WIDTH - TEXT_WIDTH) / 2;
+        final int TEXT_Y = BUTTON_Y_POSITION + ((BUTTON_HEIGHT - fontMetrics.getHeight()) / 2) + fontMetrics.getAscent();
         graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString(BUTTON_TEXT, TEXT_X, TEXT_Y);
+    }
 
-        // Draw horizontal line
-        int middleY = SCREEN_HEIGHT / 2;
-        graphics2D.drawLine(0, middleY, SCREEN_WIDTH, middleY);
+    /**
+     * Checks if the given mouse coordinates are inside the bounds of the settings button.
+     * If the mouse coordinates are inside the button, it invokes the method to handle the settings button click.
+     *
+     * @param mouseX The x-coordinate of the mouse pointer.
+     * @param mouseY The y-coordinate of the mouse pointer.
+     */
+    public void isInsideButton(int mouseX, int mouseY) {
+        if (mouseX >= BUTTON_X_POSITION && mouseX <= BUTTON_X_POSITION + BUTTON_WIDTH &&
+                mouseY >= BUTTON_Y_POSITION && mouseY <= BUTTON_Y_POSITION + BUTTON_HEIGHT) {
+            handleSettingsButtonClick();
+        }
+    }
 
-        // Draw vertical line
-        int middleX = SCREEN_WIDTH / 2;
-        graphics2D.drawLine(middleX, 0, middleX, SCREEN_HEIGHT);
+    /**
+     * Handles the click event for the settings button by creating and displaying the OptionsFrame.
+     * The OptionsFrame provides various options for the user to configure settings.
+     */
+    private void handleSettingsButtonClick() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new OptionsFrame();
+            }
+        });
     }
 
     /**
@@ -197,6 +267,7 @@ public class MainFrame extends JPanel {
      * Circles are positioned in a grid layout, with each row containing circles horizontally aligned.
      * The method calculates the coordinates for each circle and creates Circle objects accordingly.
      */
+    @Deprecated
     private void initializeCircles() {
         int xCoordinates = (int) SCREEN_WIDTH / 3;
         int yCoordinates = (int) SCREEN_HEIGHT / 3;
@@ -219,6 +290,7 @@ public class MainFrame extends JPanel {
             xCoordinates = (int) SCREEN_WIDTH / 3;
         }
     }
+
 
     /**
      * Renders the graphical elements of the game on the panel.
@@ -258,6 +330,7 @@ public class MainFrame extends JPanel {
      *
      * @param graphics2D The Graphics2D object used for drawing.
      */
+    @Deprecated
     private void renderGameBoard(Graphics2D graphics2D) {
         final int WIDTH = (int) (X_COUNT_OF_CIRCLES * RADIUS_CYCLE) + ((X_COUNT_OF_CIRCLES - 1) * SPACE_BETWEEN_CIRCLES);
         final int HEIGHT = (int) (Y_COUNT_OF_CIRCLES * RADIUS_CYCLE) + ((Y_COUNT_OF_CIRCLES - 1) * SPACE_BETWEEN_CIRCLES);
@@ -267,10 +340,10 @@ public class MainFrame extends JPanel {
         final int ARC_HEIGHT = 30;
 
         graphics2D.setColor(new Color(28, 167, 236));
-
-        // Draw the game board background
         graphics2D.fillRoundRect(CENTER_COORDINATE_X - 256, CENTER_COORDINATE_Y - 170, WIDTH + 80, HEIGHT + 40, ARC_WIDTH, ARC_HEIGHT);
     }
+
+
 
     /**
      * Calculates the horizontal spacing between circles in a row on the game board.
@@ -302,6 +375,9 @@ public class MainFrame extends JPanel {
      * @param circle     The Circle object representing the circle to be drawn.
      */
     private void drawCircle(Circle circle, Graphics2D graphics2D) {
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.fillOval(circle.getXCoordinate(), circle.getYCoordinate(), RADIUS_CYCLE + 2, RADIUS_CYCLE + 2);
+
         graphics2D.setColor(circle.getColor());
         graphics2D.fillOval(circle.getXCoordinate(), circle.getYCoordinate(), RADIUS_CYCLE, RADIUS_CYCLE);
     }
@@ -355,12 +431,12 @@ public class MainFrame extends JPanel {
             if (circle.getID() == targedCicleID) {
                 if (turnPlayer1) {
                     circle.setColor(COLOR_PLAYER_1);
-                    BORDER_CIRCLES_PLAYER_1.removeLast();
+                    STORAGE_CIRCLES_PLAYER_1.removeLast();
                     turnPlayer1 = false;
                 }
                 else {
                     circle.setColor(COLOR_PLAYER_2);
-                    BORDER_CIRCLES_PLAYER_2.removeLast();
+                    STORAGE_CIRCLES_PLAYER_2.removeLast();
                     turnPlayer1 = true;
                 }
                 break;
