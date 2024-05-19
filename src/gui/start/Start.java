@@ -12,7 +12,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class start{
+class Start{
+    
     public static void main(String[] args) {
 
         JFrame Auswahlfenster = new JFrame();
