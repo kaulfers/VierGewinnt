@@ -190,6 +190,16 @@ public class Board implements BoardInterface,BoardTestInterface {
     }
 
     /**
+     * Gibt die Spalte zurück, in der der Computer seinen nächsten Zug machen soll.
+     * @param Das aktuelle Spielbrett
+     * @return Die Spalte in dem der Token platziert werden soll
+     */
+    public int getComputerMove(Board board){
+        return 0;
+        // TODO Implementation
+    }
+
+    /**
     *    Setzt den Status, ob das Spielfeld voll ist oder nicht.
     *   @param isFull True, wenn das Spielfeld voll ist, ansonsten False.
     */
