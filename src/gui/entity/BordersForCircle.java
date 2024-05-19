@@ -2,6 +2,9 @@ package gui.entity;
 
 import java.awt.*;
 
+/**
+* These are just bigger and darker circles behind the normal ones, meant onlyy for visual effects. 
+*/
 public class BordersForCircle extends Circle {
     private final int BORDER_PADDING;
 
