@@ -15,7 +15,7 @@ public class GameTest {
     void setUp(){
         board = new Board();
     }
-
+    // das ist nur ein Beispiel um junit testen, hier soll später was anderes stehen
     @Test
     @DisplayName("Test GetTurn")
     void testGetTurn(){

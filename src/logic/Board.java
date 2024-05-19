@@ -10,21 +10,21 @@ public class Board implements BoardInterface,BoardTestInterface {
     boolean isFull; // wenn das Spielfeld voll ist und keiner gewonnen hat
 
     //vollständiger Konstruktor
-    Board(boolean iP1T, int columns, int rows, int wHW, boolean iF){
+    public Board(boolean iP1T, int columns, int rows, int wHW, boolean iF){
         isPlayer1sTurn = iP1T;
         board = new Tile[rows][columns];
         whoHasWon = wHW;
         isFull = iF;
     }
     // legt nur die Größe fest
-    Board(int columns, int rows){
+    public Board(int columns, int rows){
         isPlayer1sTurn = true;
         board = new Tile[rows][columns];
         whoHasWon = 0;
         isFull = false;
     }
     // Standard Konstruktor, macht das Spielfeld in normaler Größe
-    Board(){
+    public Board(){
         isPlayer1sTurn = true;
         board = new Tile[6][7];
         whoHasWon = 0;
