@@ -164,14 +164,21 @@ public class Board implements BoardInterface,BoardTestInterface {
         this.board = new Tile[this.board.length][columns];
     }
 
+    @Override
+    public void setrows(int rows) {
+
+    }
+
     /** 
     *    Setzt die Anzahl der Reihen des Spielfelds.
     *    @param rows Die neue Anzahl der Reihen.
     */
+
+    /*
     @Override
     public void setRows(int rows) {// Hier kann zusätzliche Logik implementiert werden, um das Spielfeld entsprechend der Anzahl der Reihen anzupassen
         this.board = new Tile[rows][this.board[0].length];
-    }
+    }*/
 
     /**     
     *    Setzt den Status, wer das Spiel gewonnen hat.
