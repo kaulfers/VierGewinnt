@@ -169,7 +169,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 
     }
 
-    /** 
+    /**
     *    Setzt die Anzahl der Reihen des Spielfelds.
     *    @param rows Die neue Anzahl der Reihen.
     */
