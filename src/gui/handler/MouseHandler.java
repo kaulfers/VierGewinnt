@@ -35,5 +35,6 @@ public class MouseHandler extends MouseAdapter {
         int mouseY = e.getY();
 
         mainFrame.checkIfMouseClickedAColumn(mouseX);
+        mainFrame.isInsideButton(mouseX, mouseY);
     }
 }

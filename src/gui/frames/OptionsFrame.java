@@ -1,3 +1,5 @@
+package gui.frames;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,16 +8,17 @@ import java.awt.event.ActionListener;
 class OptionsFrame {
     OptionsFrame(){
         JFrame optionsFrame = new JFrame("Optionen");
+
         JPanel panel = new JPanel();
 
         JPanel goBackPanel = new JPanel();
         JButton goBackButton= new JButton("Zurück");
         JLabel emptyJLabel2 = new JLabel("");
         JLabel emptyJLabel3 = new JLabel("");
-        
+
         JLabel height = new JLabel("Hoehe");
         JTextField heightInput= new JTextField("...");
-        
+
         JLabel width = new JLabel("Breite");
         JTextField widthInput= new JTextField("...");
         JButton playAgainButton= new JButton("Bestätigen und Neustarten");
@@ -43,25 +46,25 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
+
                 };
-            });    
-        
+            });
+
         saveButton.addActionListener(
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
+
                 };
-            }); 
-            
+            });
+
         quitButton.addActionListener(
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                  
+
                 };
-            });     
+            });
 
         panel.add(goBackPanel);
         panel.add(height);
@@ -77,12 +80,11 @@ class OptionsFrame {
 
         optionsFrame.add(panel);
         optionsFrame.pack();
-        optionsFrame.setSize(450, 600); 
+        optionsFrame.setSize(450, 600);
         optionsFrame.setLocationRelativeTo(null);
         optionsFrame.setAlwaysOnTop(true);
         optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         optionsFrame.setVisible(true);
-
     }
 }
 
