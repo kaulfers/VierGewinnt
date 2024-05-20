@@ -18,6 +18,7 @@ public class Board implements BoardInterface,BoardTestInterface {
         board = new Tile[rows][columns];
         whoHasWon = wHW;
         isFull = iF;
+        fillBoard();
     }
     // legt nur die Größe fest
     public Board(int columns, int rows){
@@ -25,6 +26,7 @@ public class Board implements BoardInterface,BoardTestInterface {
         board = new Tile[rows][columns];
         whoHasWon = 0;
         isFull = false;
+        fillBoard();
     }
     // Standard Konstruktor, macht das Spielfeld in normaler Größe
     public Board(){
@@ -32,6 +34,7 @@ public class Board implements BoardInterface,BoardTestInterface {
         board = new Tile[6][7];
         whoHasWon = 0;
         isFull = false;
+        fillBoard();
     }
 
     private Board(Board board) {
@@ -47,6 +50,26 @@ public class Board implements BoardInterface,BoardTestInterface {
         this.isPlayer1sTurn = board.isPlayer1sTurn;
         this.whoHasWon = board.whoHasWon;
         this.isFull = board.isFull;
+    }
+
+    private void fillBoard(){
+        for(int i = 0; i < board.length; i++){
+            for(int l = 0; l < board[0].length; l++){
+                board[i][l] = new Tile();
+            }
+        }
+    }
+
+    @Override
+    public String toString(){
+        String ret = "";
+        for(int i = 0; i < board.length; i++){
+            for(int l = 0; l < board[0].length; l++){
+                ret = ret + board[i][l].toString();
+            }
+            ret = ret + "\n";
+        }
+        return ret;
     }
 
     @Override
@@ -133,9 +156,9 @@ public class Board implements BoardInterface,BoardTestInterface {
         if (row == -1) {
             throw new IllegalArgumentException("Column is full");}
         if (isPlayer1sTurn) {
-            board[row][column] = new Tile(1); // Spieler 1
+            board[row-1][column].setStatus(1);   // Spieler 1
         } else {
-            board[row][column] = new Tile(2); // Spieler 2
+            board[row-1][column].setStatus(2);   // Spieler 2
         }
         checkStatus(column);
         changePlayer();
@@ -148,8 +171,8 @@ public class Board implements BoardInterface,BoardTestInterface {
     */
     int isTopOfColumn(int column) {
         for (int row = board.length - 1; row >= 0; row--) {
-            if (board[row][column] == null || board[row][column].isEmpty()) {
-                return row;
+            if (board[row][column].isEmpty()) {
+                return row+1;
             }
         }
         return -1; // Spalte ist voll
