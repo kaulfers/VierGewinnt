@@ -41,7 +41,7 @@ public class Board implements BoardInterface,BoardTestInterface {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 this.board[i][j] = new Tile();
-                this.board[i][j].setState(board.board[i][j].getState());
+                this.board[i][j].setStatus(board.board[i][j].getStatus());
             }
         }
         this.isPlayer1sTurn = board.isPlayer1sTurn;
@@ -215,7 +215,6 @@ public class Board implements BoardInterface,BoardTestInterface {
      * @return Die Spalte in dem der Token platziert werden soll
      */
     public int getComputerMove(Board board){
-        Random random = new Random();
         int move;
         if (-1 != (move = canMakeWinningMove(board))) {
             return move;
