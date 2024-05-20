@@ -32,7 +32,7 @@ public class Tile {
         *   Gibt den aktuellen Status der Kachel zurück.
         *   @return Der Status der Kachel (0 für leer, 1 für Spieler1, 2 für Spieler2).
         */
-    int getStatus() {
+    public int getStatus() {
         return status;}
 
         /**
