@@ -3,6 +3,9 @@ package logic;
 import api.BoardInterface;
 import api.BoardTestInterface;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.List;
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
     Tile[][] board; // das Spielfeld 	//Array[rows][columns]
@@ -29,6 +32,21 @@ public class Board implements BoardInterface,BoardTestInterface {
         board = new Tile[6][7];
         whoHasWon = 0;
         isFull = false;
+    }
+
+    private Board(Board board) {
+        int rows = board.board.length;
+        int columns = board.board[0].length;
+        this.board = new Tile[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                this.board[i][j] = new Tile();
+                this.board[i][j].setState(board.board[i][j].getState());
+            }
+        }
+        this.isPlayer1sTurn = board.isPlayer1sTurn;
+        this.whoHasWon = board.whoHasWon;
+        this.isFull = board.isFull;
     }
 
     @Override
@@ -190,13 +208,146 @@ public class Board implements BoardInterface,BoardTestInterface {
     }
 
     /**
-     * Gibt die Spalte zurück, in der der Computer seinen nächsten Zug machen soll.
-     * @param Das aktuelle Spielbrett
+     * Calculates the next move for the computer player using the minimax algorithm.
+     * For better explanation of the algorithm, see the method miniMax.
+     * @see #miniMax(Board, int, int, int, int)
+     * @param board Das aktuelle Spielbrett
      * @return Die Spalte in dem der Token platziert werden soll
      */
     public int getComputerMove(Board board){
-        return 0;
-        // TODO Implementation
+        Random random = new Random();
+        int move;
+        if (-1 != (move = canMakeWinningMove(board))) {
+            return move;
+        } else if (-1 != (move = canBlockOpponent(board))) {
+            return move;
+        }
+        int currentPlayer = board.isPlayer1sTurn ? 1 : 2;
+        return miniMax(board, 5, Integer.MIN_VALUE, Integer.MAX_VALUE, currentPlayer).column;
+    }
+
+    /**
+     * Uses the minimax algorithm to determine the best move for the computer.
+     * The algorithm simulates all possible moves and evaluates the resulting board states.
+     * @param board the current game board
+     * @param depth the maximum depth of the search tree
+     * @param alpha the best value that the maximizer currently can guarantee at that level or above
+     * @param beta the best value that the minimizer currently can guarantee at that level or above
+     * @param maximizingPlayer the player who is currently maximizing their score
+     * @return a Result object containing the best move and its score
+     */
+    private Result miniMax(Board board, int depth, int alpha, int beta, int maximizingPlayer) {
+        Random random = new Random();
+        if (depth == 0 || board.isFull) {
+            if (board.whoHasWon == maximizingPlayer) {
+                return new Result(-1, 100);
+            } else if (board.whoHasWon == (maximizingPlayer == 1 ? 2 : 1)) {
+                return new Result(-1, -100);
+            } else if (board.isFull){
+                return new Result(-1, 0);
+            } else {
+                return (new Result(-1, scorePosition(board, maximizingPlayer) + random.nextInt(-10, 10)));
+            }
+        }
+        if (maximizingPlayer == (board.isPlayer1sTurn ? 1 : 2)) {
+            int maxEval = Integer.MIN_VALUE;
+            List<Integer> possibleMoves = getAllPossibleMoves(board);
+            int column = possibleMoves.get(random.nextInt(possibleMoves.size()));
+            for (int i = 0; i < possibleMoves.size(); i++) {
+                Board newBoard = new Board(board);
+                newBoard.placeStone(possibleMoves.get(i));
+                int eval = miniMax(newBoard, depth - 1, alpha, beta,maximizingPlayer).score;
+                if (eval > maxEval) {
+                    maxEval = eval;
+                    column = possibleMoves.get(i);
+                }
+                alpha = Math.max(alpha, eval);
+
+                if (alpha >= beta) {
+                    break;
+                }
+            }
+            return new Result(column, maxEval);
+        } else {
+            int minEval = Integer.MAX_VALUE;
+            List<Integer> possibleMoves = getAllPossibleMoves(board);
+            int column = possibleMoves.get(random.nextInt(possibleMoves.size()));
+            for (int i = 0; i < possibleMoves.size(); i++) {
+                Board newBoard = new Board(board);
+                newBoard.placeStone(possibleMoves.get(i));
+                int eval = miniMax(newBoard, depth - 1, alpha, beta, maximizingPlayer).score;
+                if (eval < minEval) {
+                    minEval = eval;
+                    column = possibleMoves.get(i);
+                }
+                beta = Math.min(beta, eval);
+
+                if (alpha >= beta) {
+                    break;
+                }
+            }
+            return new Result(column, minEval);
+        }
+    }
+
+    private int canMakeWinningMove(Board board) {
+        List<Integer> possibleMoves = getAllPossibleMoves(board);
+        for (int i = 0; i < possibleMoves.size(); i++) {
+            Board newBoard = new Board(board);
+            newBoard.placeStone(possibleMoves.get(i));
+            if (newBoard.whoHasWon == (board.isPlayer1sTurn ? 1 : 2)) {
+                return possibleMoves.get(i);
+            }
+        }
+        return -1;
+    }
+
+    private int canBlockOpponent(Board board) {
+        List<Integer> possibleMoves = getAllPossibleMoves(board);
+        for (int i = 0; i < possibleMoves.size(); i++) {
+            Board newBoard = new Board(board);
+            newBoard.changePlayer();
+            newBoard.placeStone(possibleMoves.get(i));
+            if (newBoard.whoHasWon == (board.isPlayer1sTurn ? 2 : 1)) {
+                return possibleMoves.get(i);
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Scores the position of the maximizing player depending on the position of the tokens on the board
+     * Gives higher score to tokens closer to the middle of the board and closer to the bottom, prioritizing the middle
+     * @param board the current board
+     * @param maximizingPlayer the player for whom the position is scored
+     * @return the score of the position for the maximizing player
+     */
+    private int scorePosition(Board board, int maximizingPlayer) {
+        int score = 0;
+        int opponent = maximizingPlayer == 1 ? 2 : 1;
+        int middleColumn = board.getBoard()[0].length / 2;
+
+        for (int i = 0; i < board.getBoard().length; i++) {
+            for (int j = 0; j < board.getBoard()[0].length; j++) {
+                if (board.getBoard()[i][j].getStatus() == maximizingPlayer) {
+                    score += (middleColumn - Math.abs(middleColumn - j) * 2) + (board.getBoard().length - (board.getBoard().length - i));
+                } else if (board.getBoard()[i][j].getStatus() == opponent) {
+                    score -= (middleColumn - Math.abs(middleColumn - j) * 2) + (board.getBoard().length - (board.getBoard().length - i));
+                }
+            }
+        }
+        return score;
+    }
+
+    private List<Integer> getAllPossibleMoves(Board board) {
+        int columns = board.getBoard()[0].length;
+        List<Integer> possibleMoves = new ArrayList<>();
+        for (int i = 0; i < columns; i++) {
+            if (board.board[0][i].isEmpty()) {
+                possibleMoves.add(i);
+            }
+        }
+        return possibleMoves;
     }
 
     /**
@@ -236,5 +387,15 @@ public class Board implements BoardInterface,BoardTestInterface {
     @Override
     public int getWhoHasWon(){
         return this.whoHasWon;
+    }
+
+    private class Result {
+        private int column;
+        private int score;
+
+        private Result(int column, int score) {
+            this.column = column;
+            this.score = score;
+        }
     }
 }
