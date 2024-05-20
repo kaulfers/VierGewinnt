@@ -3,7 +3,6 @@ package gui.start;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import java.awt.BorderLayout;
@@ -11,11 +10,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-class Start{
-    
+class Start {
+
     public static void main(String[] args) {
 
         JFrame Auswahlfenster = new JFrame();
@@ -30,19 +27,21 @@ class Start{
         GrundstrukturDesAuswahlfensters.setLayout(new BorderLayout());
 
         JPanel AnordnungDerButtons = new JPanel();
-        AnordnungDerButtons.setLayout(new GridLayout(2,1));
+        AnordnungDerButtons.setLayout(new GridLayout(2, 1));
 
         JPanel SpielerPanel = new JPanel();
         SpielerPanel.setLayout(new FlowLayout());
-        JButton Spieler = new JButton("SpielerVSSpieler");
+        ImageIcon SpielerImage = new ImageIcon("SpielerVsSpieler.png");
+        JButton Spieler = new JButton(SpielerImage);
         SpielerPanel.add(Spieler);
         JPanel ComputerPanel = new JPanel();
         ComputerPanel.setLayout(new FlowLayout());
-        JButton Computer = new JButton("SpielerVSComputer");
+        ImageIcon ComputerImage = new ImageIcon("SpielerVsComputer.png");
+        JButton Computer = new JButton(ComputerImage);
         ComputerPanel.add(Computer);
 
-        Spieler.setPreferredSize(new Dimension(400,120));
-        Computer.setPreferredSize(new Dimension(400,120));
+        Spieler.setPreferredSize(new Dimension(400, 120));
+        Computer.setPreferredSize(new Dimension(400, 120));
 
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
@@ -59,13 +58,7 @@ class Start{
         AnordnungDerButtons.add(SpielerPanel);
         AnordnungDerButtons.add(ComputerPanel);
 
-        Spieler.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-    
-        });
         Auswahlfenster.setVisible(true);
-        
+
     }
 }
