@@ -46,8 +46,10 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   
-                    
+                    Integer y_heightNew = Integer.parseInt(heightInput.getText());
+                    Integer x_widthNew = Integer.parseInt(widthInput.getText());
+                    //Noch nicht möglich
+                    //new MainPanel(y_heightNew,x_widthNew);
                 };
             });
 
