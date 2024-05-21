@@ -39,6 +39,8 @@ public class StartFrame {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+
+            Auswahlfenster.dispose();
         });
 
         SpielerPanel.add(Spieler);
