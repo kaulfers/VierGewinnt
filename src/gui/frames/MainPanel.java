@@ -396,7 +396,6 @@ public class MainPanel extends JPanel {
 
         for (int i = 0; i < X_COUNT_OF_CIRCLES; i++) {
             if (mouseX >= xCordinatesForEachColumn - RADIUS_CYCLE && mouseX <= xCordinatesForEachColumn + RADIUS_CYCLE) {
-
                 boardInterface.placeStone(i);
                 changeColorOfCircleInClickedColumn(i);
                 checkGameStatus();
@@ -406,13 +405,9 @@ public class MainPanel extends JPanel {
         }
     }
 
-    private boolean isColumnFull() {
-        return false;
-    }
-
     private void checkGameStatus() {
         if (boardInterface.getIsFull()) {
-            System.out.println("is full");
+            System.out.println("is full, no one won");
         }
         if (boardInterface.getWhoHasWon() == 1) {
             System.out.println("openEndScreen with player 1 won");
