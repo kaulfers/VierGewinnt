@@ -49,11 +49,11 @@ public class GameTest {
         board.placeStone(0);    // Spieler 2
         board.placeStone(0);    // Spieler 1
         board.placeStone(0);    // Spieler 2
-        board.placeStone(0);    // Spieler 1
+        //board.placeStone(0);    // Spieler 1
         assertEquals(0, board.getWhoHasWon(), "Falscher Gewinner Status");
         assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
     }
-        @Test
+    @Test
     @DisplayName("Sieg Spieler 2")
     void testPlaceStone3(){
         board.placeStone(0);    // Spieler 1    
@@ -68,12 +68,12 @@ public class GameTest {
         assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
     }
 
-    @@Test
+    @Test
     @DisplayName("Board Voll ohne Sieger")
     void testFullBoardWithoutWinner() {
         // Fülle das Spielfeld komplett
         for (int col = 0; col < board.getColumns(); col++) {
-            for (int row = 0; row < board.getRows(); row++) {
+            for (int row = 0; row < board.getrows(); row++) {
             board.placeStone(col); // Wechsle zwischen den Spielern
             }
         }
@@ -111,8 +111,8 @@ public class GameTest {
         board.placeStone(2);    // Spieler 1
         board.placeStone(3);    // Spieler 2
         board.placeStone(3);    // Spieler 1
-        board.placeStone(3);    // Spieler 2
-        board.placeStone(4);    // Spieler 1 (diagonaler Sieg)
+        board.placeStone(4);    // Spieler 2
+        board.placeStone(3);    // Spieler 1 (diagonaler Sieg)
     
         assertEquals(1, board.getWhoHasWon(), "Falscher Gewinner Status");
         assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
