@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author Konrad
  */
-public class MainFrame extends JPanel {
+public class MainPanel extends JPanel {
     private final int SCREEN_WIDTH = 1300;
     private final int SCREEN_HEIGHT = 900;
 
@@ -42,7 +42,7 @@ public class MainFrame extends JPanel {
     final private int BUTTON_X_POSITION = SCREEN_WIDTH - BUTTON_WIDTH - 30;
     final private int BUTTON_Y_POSITION = 25;
 
-    public MainFrame() {
+    public MainPanel() {
         X_COUNT_OF_CIRCLES = 7;
         Y_COUNT_OF_CIRCLES = 6;
 

@@ -1,6 +1,6 @@
 package gui.handler;
 
-import gui.frames.MainFrame;
+import gui.frames.MainPanel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,15 +11,15 @@ import java.awt.event.MouseEvent;
  * and passing the coordinates to the MainFrame for processing.
  */
 public class MouseHandler extends MouseAdapter {
-    MainFrame mainFrame;
+    MainPanel mainPanel;
 
     /**
      * Constructs a MouseHandler object with a reference to the MainFrame.
      *
-     * @param mainFrame The MainFrame object to which mouse click events will be forwarded.
+     * @param mainPanel The MainFrame object to which mouse click events will be forwarded.
      */
-    public MouseHandler(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    public MouseHandler(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
     }
 
     /**
@@ -34,7 +34,7 @@ public class MouseHandler extends MouseAdapter {
         int mouseX = e.getX();
         int mouseY = e.getY();
 
-        mainFrame.checkIfMouseClickedAColumn(mouseX);
-        mainFrame.isInsideButton(mouseX, mouseY);
+        mainPanel.checkIfMouseClickedAColumn(mouseX);
+        mainPanel.isInsideButton(mouseX, mouseY);
     }
 }

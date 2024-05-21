@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
-import java.awt.event.ActionListener;
 
 public class StartFrame {
     public StartFrame() {
@@ -34,8 +33,8 @@ public class StartFrame {
         JButton Spieler = new JButton("Spieler Vs Spieler");
         Spieler.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainFrame mainFrame = new MainFrame();
-            frame.add(mainFrame);
+            MainPanel mainPanel = new MainPanel();
+            frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
             frame.setLocationRelativeTo(null);
