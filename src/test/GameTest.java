@@ -71,12 +71,15 @@ public class GameTest {
     @Test
     @DisplayName("Board Voll ohne Sieger")
     void testFullBoardWithoutWinner() {
-        // Fülle das Spielfeld komplett
-        for (int col = 0; col < board.getColumns(); col++) {
-            for (int row = 0; row < board.getrows(); row++) {
-            board.placeStone(col); // Wechsle zwischen den Spielern
-            }
-        }
+        for(int i = 0; i < 6 ; i++) board.placeStone(0);
+        for(int i = 0; i < 6 ; i++) board.placeStone(1);
+        for(int i = 0; i < 6 ; i++) board.placeStone(2);
+        board.placeStone(4);
+        board.placeStone(3);
+        for(int i = 0; i < 5 ; i++) board.placeStone(3);
+        for(int i = 0; i < 5 ; i++) board.placeStone(4);
+        for(int i = 0; i < 6 ; i++) board.placeStone(5);
+        for(int i = 0; i < 6 ; i++) board.placeStone(6);
         assertEquals(0, board.getWhoHasWon(), "Falscher Gewinner Status");
         assertEquals(true, board.getIsFull(), "Falscher IsFull Status");
     }
