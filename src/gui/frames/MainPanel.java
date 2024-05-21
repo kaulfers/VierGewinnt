@@ -251,7 +251,7 @@ public class MainPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OptionsFrame(BoardInterface boardInterface);
+                new OptionsFrame(boardInterface);
             }
         });
     }
@@ -407,13 +407,28 @@ public class MainPanel extends JPanel {
 
     private void checkGameStatus() {
         if (boardInterface.getIsFull()) {
-            System.out.println("is full, no one won");
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new EndFrame();
+                }
+            });
         }
         if (boardInterface.getWhoHasWon() == 1) {
-            System.out.println("openEndScreen with player 1 won");
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new EndFrame();
+                }
+            });
         }
         if (boardInterface.getWhoHasWon() == 2) {
-            System.out.println("openEndScreen with player 2 won");
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new EndFrame();
+                }
+            });
         }
     }
 
