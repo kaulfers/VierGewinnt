@@ -1,3 +1,5 @@
+package gui.frames;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,10 +11,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 
-class Start {
-
-    public static void main(String[] args) {
-
+public class StartFrame {
+    public StartFrame() {
         JFrame Auswahlfenster = new JFrame();
         Auswahlfenster.setTitle("4-Gewinnt");
         Auswahlfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,12 +29,22 @@ class Start {
 
         JPanel SpielerPanel = new JPanel();
         SpielerPanel.setLayout(new FlowLayout());
-        ImageIcon SpielerImage = new ImageIcon("SpielerVsSpieler.png");
+        ImageIcon SpielerImage = new ImageIcon("res/SpielerVsSpieler.png");
         JButton Spieler = new JButton(SpielerImage);
+        Spieler.addActionListener(e -> {
+            JFrame frame = new JFrame();
+            MainPanel mainPanel = new MainPanel();
+            frame.add(mainPanel);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
+
         SpielerPanel.add(Spieler);
         JPanel ComputerPanel = new JPanel();
         ComputerPanel.setLayout(new FlowLayout());
-        ImageIcon ComputerImage = new ImageIcon("SpielerVsComputer.png");
+        ImageIcon ComputerImage = new ImageIcon("res/SpielerVsComputer.png");
         JButton Computer = new JButton(ComputerImage);
         ComputerPanel.add(Computer);
 
@@ -57,6 +67,6 @@ class Start {
         AnordnungDerButtons.add(ComputerPanel);
 
         Auswahlfenster.setVisible(true);
-
+        Auswahlfenster.setLocationRelativeTo(null);
     }
 }
