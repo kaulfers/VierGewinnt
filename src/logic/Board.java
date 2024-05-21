@@ -37,6 +37,8 @@ public class Board implements BoardInterface,BoardTestInterface {
         fillBoard();
     }
 
+    //test
+
     private Board(Board board) {
         int rows = board.board.length;
         int columns = board.board[0].length;
