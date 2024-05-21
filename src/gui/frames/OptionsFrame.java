@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class OptionsFrame {
-    OptionsFrame(){
+    BoardInterface boardInterface;
+    OptionsFrame(BoardInterface boardInterface){
+        this.boardInterface=boardInterface;
         JFrame optionsFrame = new JFrame("Optionen");
 
         JPanel panel = new JPanel();
@@ -38,7 +40,7 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   optionsFrame.setVisible(false);
+                   optionsFrame.dispose();
                 };
             });
             
@@ -48,8 +50,8 @@ class OptionsFrame {
                 public void actionPerformed(ActionEvent e) {
                     Integer y_heightNew = Integer.parseInt(heightInput.getText());
                     Integer x_widthNew = Integer.parseInt(widthInput.getText());
-                    //Noch nicht möglich
-                    //new MainPanel(y_heightNew,x_widthNew);
+                    
+
                 };
             });
 
@@ -57,7 +59,7 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                
                 };
             });
 

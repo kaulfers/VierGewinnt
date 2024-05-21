@@ -251,7 +251,7 @@ public class MainPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OptionsFrame();
+                new OptionsFrame(BoardInterface boardInterface);
             }
         });
     }
