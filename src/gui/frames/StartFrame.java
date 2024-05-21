@@ -1,5 +1,3 @@
-package gui.frames;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,8 +9,10 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 
-public class StartFrame {
-    public StartFrame() {
+class Start {
+
+    public static void main(String[] args) {
+
         JFrame Auswahlfenster = new JFrame();
         Auswahlfenster.setTitle("4-Gewinnt");
         Auswahlfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,22 +30,12 @@ public class StartFrame {
         JPanel SpielerPanel = new JPanel();
         SpielerPanel.setLayout(new FlowLayout());
         ImageIcon SpielerImage = new ImageIcon("SpielerVsSpieler.png");
-        JButton Spieler = new JButton("Spieler Vs Spieler");
-        Spieler.addActionListener(e -> {
-            JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel();
-            frame.add(mainPanel);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
+        JButton Spieler = new JButton(SpielerImage);
         SpielerPanel.add(Spieler);
-
         JPanel ComputerPanel = new JPanel();
         ComputerPanel.setLayout(new FlowLayout());
         ImageIcon ComputerImage = new ImageIcon("SpielerVsComputer.png");
-        JButton Computer = new JButton("Spieler Vs Computer");
+        JButton Computer = new JButton(ComputerImage);
         ComputerPanel.add(Computer);
 
         Spieler.setPreferredSize(new Dimension(400, 120));
@@ -54,8 +44,9 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
-        aktuellerSpielstand.setForeground(Color.BLACK);
+        aktuellerSpielstand.setForeground(Color.WHITE);
         aktuellerSpielstandPanel.add(aktuellerSpielstand);
+        aktuellerSpielstand.setBackground(Color.BLUE);
 
         aktuellerSpielstand.setPreferredSize(new Dimension(300, 50));
 
@@ -66,8 +57,6 @@ public class StartFrame {
         AnordnungDerButtons.add(ComputerPanel);
 
         Auswahlfenster.setVisible(true);
-        Auswahlfenster.pack();
-        Auswahlfenster.setLocationRelativeTo(null);
-        Auswahlfenster.setVisible(true);
+
     }
 }
