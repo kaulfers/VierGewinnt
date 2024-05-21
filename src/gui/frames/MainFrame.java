@@ -69,8 +69,8 @@ public class MainFrame extends JPanel {
         renderGameBoard(graphics2D);
         renderGameElements(graphics2D);
         renderCircleInStorage(graphics2D);
-        drawTextLabel(graphics2D, "left", "Player 1");
-        drawTextLabel(graphics2D, "right", "Player 2");
+        drawTextLabel(graphics2D, "left", "Spieler 1");
+        drawTextLabel(graphics2D, "right", "Spieler 2");
         renderPlayersTurnText(graphics2D);
         renderSettingsButton(graphics2D);
 
@@ -126,7 +126,7 @@ public class MainFrame extends JPanel {
 
     private void renderPlayersTurnText(Graphics2D graphics2D) {
         final int Y_POSITION = 100;
-        final String TEXT = turnPlayer1 ? "Player 1's turn" : "Player 2's turn";
+        final String TEXT = turnPlayer1 ? "Spieler 1 ist dran!" : "Spieler 2 ist dran!";
         final int FONT_SIZE = 32; // Choose the desired font size
 
         // Set the font size
