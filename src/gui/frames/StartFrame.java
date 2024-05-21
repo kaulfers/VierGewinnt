@@ -56,7 +56,7 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
-        aktuellerSpielstand.setForeground(Color.WHITE);
+        aktuellerSpielstand.setForeground(Color.BLACK);
         aktuellerSpielstandPanel.add(aktuellerSpielstand);
         aktuellerSpielstand.setBackground(Color.BLUE);
 
