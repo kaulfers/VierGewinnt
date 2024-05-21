@@ -1,0 +1,74 @@
+package gui.frames;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+
+public class StartFrame {
+    public StartFrame() {
+        JFrame Auswahlfenster = new JFrame();
+        Auswahlfenster.setTitle("4-Gewinnt");
+        Auswahlfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Auswahlfenster.setSize(1000, 500);
+        UIManager.put("Panel.background", Color.WHITE);
+        UIManager.put("Button.background", Color.WHITE);
+        UIManager.put("Label.background", Color.WHITE);
+
+        JPanel GrundstrukturDesAuswahlfensters = new JPanel();
+        GrundstrukturDesAuswahlfensters.setLayout(new BorderLayout());
+
+        JPanel AnordnungDerButtons = new JPanel();
+        AnordnungDerButtons.setLayout(new GridLayout(2, 1));
+
+        JPanel SpielerPanel = new JPanel();
+        SpielerPanel.setLayout(new FlowLayout());
+        ImageIcon SpielerImage = new ImageIcon("SpielerVsSpieler.png");
+        JButton Spieler = new JButton("Spieler Vs Spieler");
+        Spieler.addActionListener(e -> {
+            JFrame frame = new JFrame();
+            MainFrame mainFrame = new MainFrame();
+            frame.add(mainFrame);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
+        SpielerPanel.add(Spieler);
+
+        JPanel ComputerPanel = new JPanel();
+        ComputerPanel.setLayout(new FlowLayout());
+        ImageIcon ComputerImage = new ImageIcon("SpielerVsComputer.png");
+        JButton Computer = new JButton("Spieler Vs Computer");
+        ComputerPanel.add(Computer);
+
+        Spieler.setPreferredSize(new Dimension(400, 120));
+        Computer.setPreferredSize(new Dimension(400, 120));
+
+        JPanel aktuellerSpielstandPanel = new JPanel();
+        aktuellerSpielstandPanel.setLayout(new FlowLayout());
+        JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
+        aktuellerSpielstand.setForeground(Color.BLACK);
+        aktuellerSpielstandPanel.add(aktuellerSpielstand);
+
+        aktuellerSpielstand.setPreferredSize(new Dimension(300, 50));
+
+        Auswahlfenster.add(GrundstrukturDesAuswahlfensters);
+        GrundstrukturDesAuswahlfensters.add(AnordnungDerButtons, BorderLayout.CENTER);
+        GrundstrukturDesAuswahlfensters.add(aktuellerSpielstandPanel, BorderLayout.SOUTH);
+        AnordnungDerButtons.add(SpielerPanel);
+        AnordnungDerButtons.add(ComputerPanel);
+
+        Auswahlfenster.setVisible(true);
+        Auswahlfenster.pack();
+        Auswahlfenster.setLocationRelativeTo(null);
+        Auswahlfenster.setVisible(true);
+    }
+}

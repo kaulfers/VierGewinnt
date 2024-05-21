@@ -1,6 +1,6 @@
 package gui.main;
 
-import gui.frames.MainFrame;
+import gui.frames.StartFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,16 +11,6 @@ import java.awt.*;
  */
 public class App {
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new MainFrame();
-
-        frame.add(panel);
-
-        frame.pack();
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+        new StartFrame();
     }
 }
