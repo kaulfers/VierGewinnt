@@ -12,8 +12,10 @@ import java.awt.GridLayout;
 import java.awt.Color;
 
 public class StartFrame {
+    private static JFrame Auswahlfenster;
+
     public StartFrame() {
-        JFrame Auswahlfenster = new JFrame();
+        Auswahlfenster = new JFrame();
         Auswahlfenster.setTitle("4-Gewinnt");
         Auswahlfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Auswahlfenster.setSize(1000, 500);
@@ -70,5 +72,9 @@ public class StartFrame {
 
         Auswahlfenster.setVisible(true);
         Auswahlfenster.setLocationRelativeTo(null);
+    }
+
+    public static JFrame getAuswahlfenster() {
+        return Auswahlfenster;
     }
 }

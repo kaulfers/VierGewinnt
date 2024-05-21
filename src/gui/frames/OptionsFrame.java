@@ -7,9 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class OptionsFrame {
+class OptionsFrame extends Frame {
     BoardInterface boardInterface;
-    OptionsFrame(BoardInterface boardInterface){
+    OptionsFrame(){
         this.boardInterface=boardInterface;
         JFrame optionsFrame = new JFrame("Optionen");
 

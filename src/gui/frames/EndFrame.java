@@ -1,5 +1,6 @@
 package gui.frames;
 
+import logic.Board;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -11,13 +12,14 @@ import java.awt.event.ActionListener;
 public class EndFrame extends JFrame {
     private JButton closeButton;
     private JButton againPlayButton;
-    private JButton saveButton;
+    private JButton settingButton;
     private JLabel messageLabel;
+
 
     public EndFrame() {
         // Basic view window
         setTitle("4Gewinnt");
-        setSize(800, 500);
+        setSize(900, 700);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.LIGHT_GRAY);
@@ -33,7 +35,7 @@ public class EndFrame extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
 
         // Label
-        messageLabel = new RoundedLabel("Spieler 1 hat gewonnen", SwingConstants.CENTER);
+        messageLabel = new RoundedLabel(whoWon(), SwingConstants.CENTER);
         Dimension labelSize = new Dimension(450, 110);
         messageLabel.setPreferredSize(labelSize);
         messageLabel.setBorder(BorderFactory.createCompoundBorder(
@@ -62,17 +64,17 @@ public class EndFrame extends JFrame {
         againPlayButton.setPreferredSize(btnSize);
         againPlayButton.setBorder(grayBorder);
 
-        saveButton = new JButton("Einstellungen");
-        saveButton.addActionListener(new SaveButtonListener());
-        saveButton.setPreferredSize(btnSize);
-        saveButton.setBorder(grayBorder);
+        settingButton = new JButton("Einstellungen");
+        settingButton.addActionListener(new SettingButtonListener());
+        settingButton.setPreferredSize(btnSize);
+        settingButton.setBorder(grayBorder);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         buttonPanel.add(closeButton);
         buttonPanel.add(againPlayButton);
-        buttonPanel.add(saveButton);
+        buttonPanel.add(settingButton);
 
 
         gbc.gridy = 1;
@@ -87,19 +89,55 @@ public class EndFrame extends JFrame {
         this.setVisible(true);
     }
 
-    // Listeners waiting for actions
+
+
+    // Listeners
     private class CloseButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            System.exit(0);
         }
     }
-    private class SaveButtonListener implements ActionListener {
+    private class SettingButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
+            openOptionsFrame();
         }
     }
+
     private class AgainPlayButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            restartApplication();
         }
     }
+
+    // methodies for listeners
+    private void openOptionsFrame() {
+        OptionsFrame optionsFrame = new OptionsFrame();
+        optionsFrame.setVisible(true);
+    }
+
+    private void restartApplication() {
+        JFrame auswahlfenster = StartFrame.getAuswahlfenster();
+        auswahlfenster.setVisible(true);
+    }
+
+    // who won methody
+    private String whoWon() {
+        System.out.println(determineWinner());
+        int winner = determineWinner();
+        if (winner == 1) {
+            return ("Spieler 1 hat gewonnen");
+        } if (winner == 2) {
+            return "Spieler 2 hat gewonnen";
+        } else {
+            return "Unentschieden";
+        }
+    }
+    Board board = new Board();
+    private int determineWinner() {
+        System.out.println(board.getWhoHasWon());
+        return board.getWhoHasWon();
+    }
+
 
     // Rounded borders class
     public class RoundedLabel extends JLabel {
