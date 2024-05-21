@@ -153,7 +153,7 @@ public class Board implements BoardInterface,BoardTestInterface {
     @Override
     public void placeStone(int column) {
         int row = isTopOfColumn(column);
-        if (row == -1) {
+        if (row == 0) {
             throw new IllegalArgumentException("Column is full");}
         if (isPlayer1sTurn) {
             board[row-1][column].setStatus(1);   // Spieler 1
@@ -167,7 +167,7 @@ public class Board implements BoardInterface,BoardTestInterface {
     /**
     *    Gibt die Reihe des obersten Steins einer Spalte zurück.
     *    @param column Die Spalte, für die die oberste Reihe zurückgegeben werden soll.
-    *    @return Die Reihe des obersten Steins in der Spalte, oder -1, wenn die Spalte voll ist.
+    *    @return Die Reihe des obersten Steins in der Spalte, oder AnzahlRows + 1, wenn leer 
     */
     int isTopOfColumn(int column) {
         for (int row = board.length - 1; row >= 0; row--) {
@@ -175,7 +175,7 @@ public class Board implements BoardInterface,BoardTestInterface {
                 return row+1;
             }
         }
-        return -1; // Spalte ist voll
+        return 0; // Spalte ist voll
     }
 
     /** 
