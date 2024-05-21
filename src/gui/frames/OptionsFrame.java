@@ -46,7 +46,8 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                   
+                    
                 };
             });
 
@@ -62,7 +63,7 @@ class OptionsFrame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    optionsFrame.dispose();
                 };
             });
 
@@ -83,7 +84,7 @@ class OptionsFrame {
         optionsFrame.setSize(450, 600);
         optionsFrame.setLocationRelativeTo(null);
         optionsFrame.setAlwaysOnTop(true);
-        optionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_EXIT);
         optionsFrame.setVisible(true);
     }
 }
