@@ -84,7 +84,7 @@ class OptionsFrame {
         optionsFrame.setSize(450, 600);
         optionsFrame.setLocationRelativeTo(null);
         optionsFrame.setAlwaysOnTop(true);
-        optionsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_EXIT);
+        optionsFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         optionsFrame.setVisible(true);
     }
 }
