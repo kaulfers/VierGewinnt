@@ -41,7 +41,7 @@ class OptionsFrame {
                    optionsFrame.setVisible(false);
                 };
             });
-
+            
         playAgainButton.addActionListener(
             new ActionListener() {
                 @Override
