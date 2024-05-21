@@ -1,15 +1,13 @@
 package gui.frames;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class StartFrame {
     private static JFrame Auswahlfenster;
@@ -27,7 +25,12 @@ public class StartFrame {
         GrundstrukturDesAuswahlfensters.setLayout(new BorderLayout());
 
         JPanel AnordnungDerButtons = new JPanel();
-        AnordnungDerButtons.setLayout(new GridLayout(2, 1));
+        AnordnungDerButtons.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(10, 0, 10, 0); // Hinzugefügt: Padding zwischen den Komponenten
+        gbc.gridx = 0; // Hinzugefügt: Spaltenposition
+        gbc.gridy = 0; // Hinzugefügt: Zeilenposition
 
         JPanel SpielerPanel = new JPanel();
         SpielerPanel.setLayout(new FlowLayout());
@@ -41,10 +44,8 @@ public class StartFrame {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-
             Auswahlfenster.dispose();
         });
-
         SpielerPanel.add(Spieler);
         JPanel ComputerPanel = new JPanel();
         ComputerPanel.setLayout(new FlowLayout());
@@ -58,7 +59,7 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
-        aktuellerSpielstand.setForeground(Color.BLACK);
+        aktuellerSpielstand.setForeground(Color.WHITE);
         aktuellerSpielstandPanel.add(aktuellerSpielstand);
         aktuellerSpielstand.setBackground(Color.BLUE);
 
@@ -66,12 +67,15 @@ public class StartFrame {
 
         Auswahlfenster.add(GrundstrukturDesAuswahlfensters);
         GrundstrukturDesAuswahlfensters.add(AnordnungDerButtons, BorderLayout.CENTER);
-        GrundstrukturDesAuswahlfensters.add(aktuellerSpielstandPanel, BorderLayout.SOUTH);
-        AnordnungDerButtons.add(SpielerPanel);
-        AnordnungDerButtons.add(ComputerPanel);
-
-        Auswahlfenster.setVisible(true);
+        //GrundstrukturDesAuswahlfensters.add(aktuellerSpielstandPanel, BorderLayout.SOUTH);
+        AnordnungDerButtons.add(SpielerPanel, gbc);
+        gbc.gridy++; // Hinzugefügt: Zeilenposition
+        AnordnungDerButtons.add(ComputerPanel, gbc);
+        gbc.gridy++; // Hinzugefügt: Zeilenposition
+        gbc.gridx = 0;
+        AnordnungDerButtons.add(aktuellerSpielstandPanel, gbc);
         Auswahlfenster.setLocationRelativeTo(null);
+        Auswahlfenster.setVisible(true);
     }
 
     public static JFrame getAuswahlfenster() {
