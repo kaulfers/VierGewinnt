@@ -198,7 +198,7 @@ public class Board implements BoardInterface,BoardTestInterface {
     *   Setzt das Spielfeld mit einer neuen Matrix von Kacheln.
     *   @param value Die neue Matrix von Kacheln für das Spielfeld.
     */
-    @Overwrite
+    @Override
     public void setBoard(Tile[][] value){
 		int row = value.length;
 		int column = value[0].length;
@@ -390,9 +390,10 @@ public class Board implements BoardInterface,BoardTestInterface {
 
     /**
      * Saves the Board-Class with all their variables in a textfile.
+     * There can only be one savecode in the savefile.
      * 
      */
-    @Overwrite
+    @Override
 	public void saveBoard(){
 
 		File savefile = new File(this.savepath);
@@ -496,7 +497,7 @@ public class Board implements BoardInterface,BoardTestInterface {
      * Overwrites the variables of the Board with the values from the savefile
      * 
      */
-    @Overwrite
+    @Override
     public void overwriteVariableWithSavestats(){
 		String code = getSavecodeFromFile();
 		
@@ -583,7 +584,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 			}
 			else{
 
-				spFeld[r][c] = Character.getNumericValue(ch);
+				spFeld[r][c] = Tile(Character.getNumericValue(ch));
 				
 				if (c < column-1){
 					c += 1;
@@ -668,23 +669,6 @@ public class Board implements BoardInterface,BoardTestInterface {
     public Tile[][] getBoard(){
         return this.board;
     }
-
-    /**
-     * overwrites the board with a given input array
-     */
-    @Overwrite
-    public void setBoard(Tile[][] value){
-		int row = value.length;
-		int column = value[0].length;
-		
-		this.board = new Tile[row][column];
-		
-		for (int r=0;r<row;r++){
-			for (int c=0;c<column;c++){
-				this.board[r][c] = value[r][c];
-			}
-		}
-	}
 
     @Override
     public int getrows(){
