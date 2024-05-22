@@ -198,10 +198,19 @@ public class Board implements BoardInterface,BoardTestInterface {
     *   Setzt das Spielfeld mit einer neuen Matrix von Kacheln.
     *   @param board Die neue Matrix von Kacheln für das Spielfeld.
     */
-    @Override
-    public void setBoard(Tile[][] board) {
-        this.board = board;
-    }
+    @Overwrite
+    public void setBoard(Tile[][] value){
+		int row = value.length;
+		int column = value[0].length;
+		
+		this.board = new Tile[row][column];
+		
+		for (int r=0;r<row;r++){
+			for (int c=0;c<column;c++){
+				this.board[r][c] = value[r][c];
+			}
+		}
+	}
 
     /**  
     *   Setzt die Anzahl der Spalten des Spielfelds.

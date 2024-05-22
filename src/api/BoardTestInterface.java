@@ -9,7 +9,6 @@ public interface BoardTestInterface {
     void saveBoard(); //speichert das Board als String in eine Textdatei
     void overwriteVariableWithSavestats(); //übernimmt die Werte aus dem savefile(Werte, die angepasst werden:board,isFull,isPlayer1sTurn)
     void setTurn(boolean player1sTurn); // setzt welcher Spieler ist am Zug (True = Spieler1, False = Spieler2)
-    void setBoard(Tile[][] board); // setzt das Spielfeld als 2-dimensionalem Array aus Kacheln(Tiles)
     void setColumns(int columns); //setzt die Anzahl der Spalten
     void setrows(int rows); //setzt die Anzahl der Reihen
     void setWhoHasWon(int whoWon); //0: niemand     1: Spieler1     2:Spieler2
