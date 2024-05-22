@@ -196,7 +196,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 
     /**
     *   Setzt das Spielfeld mit einer neuen Matrix von Kacheln.
-    *   @param board Die neue Matrix von Kacheln für das Spielfeld.
+    *   @param value Die neue Matrix von Kacheln für das Spielfeld.
     */
     @Overwrite
     public void setBoard(Tile[][] value){
