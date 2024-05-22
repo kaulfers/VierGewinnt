@@ -6,6 +6,12 @@ import api.BoardTestInterface;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
+
+import java.io.*;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public class Board implements BoardInterface,BoardTestInterface {
     boolean isPlayer1sTurn; //ist Spieler eins am Zug?
     Tile[][] board; // das Spielfeld 	//Array[rows][columns]
