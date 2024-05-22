@@ -30,6 +30,9 @@ public class MainPanel extends JPanel {
     private final Color COLOR_PLAYER_1 = new Color(68, 122, 196);
     private final Color COLOR_PLAYER_2 = new Color(245, 117, 166);
 
+    private final String PLAYER_1_NAME = "Spieler 1";
+    private final String PLAYER_2_NAME = "Spieler 2";
+
     private int amountOfCirclesPlayer1;
     private int amountOfCirclesPlayer2;
 
@@ -64,7 +67,9 @@ public class MainPanel extends JPanel {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-    public MainPanel(int X_COUNT_OF_CIRCLES, int Y_COUNT_OF_CIRCLES) {
+    public MainPanel(JFrame parentFrame, int X_COUNT_OF_CIRCLES, int Y_COUNT_OF_CIRCLES) {
+        this.parentFrame = parentFrame;
+
         this.X_COUNT_OF_CIRCLES = X_COUNT_OF_CIRCLES;
         this.Y_COUNT_OF_CIRCLES = Y_COUNT_OF_CIRCLES;
 
@@ -78,6 +83,7 @@ public class MainPanel extends JPanel {
         this.addMouseListener(new MouseHandler(this));
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
+
 
     /**
      * Overrides the paintComponent method of JPanel to customize the rendering of graphics within this panel.
@@ -93,8 +99,8 @@ public class MainPanel extends JPanel {
         renderGameBoard(graphics2D);
         renderGameElements(graphics2D);
         renderCircleInStorage(graphics2D);
-        drawTextLabel(graphics2D, "left", "Spieler 1");
-        drawTextLabel(graphics2D, "right", "Spieler 2");
+        drawTextLabel(graphics2D, "left", PLAYER_1_NAME);
+        drawTextLabel(graphics2D, "right", PLAYER_2_NAME);
         renderPlayersTurnText(graphics2D);
         renderSettingsButton(graphics2D);
 
@@ -409,32 +415,29 @@ public class MainPanel extends JPanel {
     }
 
     private void checkGameStatus() {
+        String gameOverMessage = null;
+
         if (boardInterface.getIsFull()) {
-            parentFrame.dispose();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new EndFrame("Unenschieden!");
-                }
-            });
+            gameOverMessage = "Unentschieden!";
+            return;
         }
-        if (boardInterface.getWhoHasWon() == 1) {
-            parentFrame.dispose();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new EndFrame("Spieler 1 hat gewonnen!");
-                }
-            });
+
+        // Check who has won
+        switch (boardInterface.getWhoHasWon()) {
+            case 1:
+                gameOverMessage = "Spieler 1 hat gewonnen!";
+                break;
+            case 2:
+                gameOverMessage = "Spieler 2 hat gewonnen!";
+                break;
+            default:
+                // No one has won yet, or invalid state
+                break;
         }
-        if (boardInterface.getWhoHasWon() == 2) {
+
+        if (gameOverMessage!=null) {
             parentFrame.dispose();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new EndFrame("Spieler 2 hat gewonnen!");
-                }
-            });
+            new EndFrame(gameOverMessage);
         }
     }
 
