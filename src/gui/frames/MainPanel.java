@@ -45,8 +45,11 @@ public class MainPanel extends JPanel {
     final private int BUTTON_Y_POSITION = 25;
 
     private BoardInterface boardInterface;
+    private JFrame parentFrame;
 
-    public MainPanel() {
+    public MainPanel(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
         X_COUNT_OF_CIRCLES = 7;
         Y_COUNT_OF_CIRCLES = 6;
 
@@ -407,26 +410,29 @@ public class MainPanel extends JPanel {
 
     private void checkGameStatus() {
         if (boardInterface.getIsFull()) {
+            parentFrame.dispose();
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new EndFrame();
+                    new EndFrame("Unenschieden!");
                 }
             });
         }
         if (boardInterface.getWhoHasWon() == 1) {
+            parentFrame.dispose();
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new EndFrame();
+                    new EndFrame("Spieler 1 hat gewonnen!");
                 }
             });
         }
         if (boardInterface.getWhoHasWon() == 2) {
+            parentFrame.dispose();
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new EndFrame();
+                    new EndFrame("Spieler 2 hat gewonnen!");
                 }
             });
         }

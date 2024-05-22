@@ -1,6 +1,5 @@
 package gui.frames;
 
-import logic.Board;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -15,14 +14,9 @@ public class EndFrame extends JFrame {
     private JButton settingButton;
     private JLabel messageLabel;
 
-
-    public EndFrame() {
-        // Basic view window
-        setTitle("4Gewinnt");
-        setSize(900, 700);
-
+    public EndFrame(String playerName) {
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(Color.LIGHT_GRAY);
+        mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new GridBagLayout());
 
 
@@ -35,7 +29,7 @@ public class EndFrame extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
 
         // Label
-        messageLabel = new RoundedLabel(whoWon(), SwingConstants.CENTER);
+        messageLabel = new RoundedLabel(playerName, SwingConstants.CENTER);
         Dimension labelSize = new Dimension(450, 110);
         messageLabel.setPreferredSize(labelSize);
         messageLabel.setBorder(BorderFactory.createCompoundBorder(
@@ -59,8 +53,11 @@ public class EndFrame extends JFrame {
         closeButton.setPreferredSize(btnSize);
         closeButton.setBorder(grayBorder);
 
-        againPlayButton = new JButton("Neuestarten");
-        againPlayButton.addActionListener(new AgainPlayButtonListener());
+        againPlayButton = new JButton("Neustarten");
+        againPlayButton.addActionListener(e -> {
+            this.dispose();
+            restartApplication();
+        });
         againPlayButton.setPreferredSize(btnSize);
         againPlayButton.setBorder(grayBorder);
 
@@ -70,7 +67,7 @@ public class EndFrame extends JFrame {
         settingButton.setBorder(grayBorder);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         buttonPanel.add(closeButton);
         buttonPanel.add(againPlayButton);
@@ -83,13 +80,13 @@ public class EndFrame extends JFrame {
 
         add(mainPanel);
 
+        this.setResizable(false);
+        this.setSize(1000, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
-
 
     // Listeners
     private class CloseButtonListener implements ActionListener {
@@ -103,39 +100,14 @@ public class EndFrame extends JFrame {
         }
     }
 
-    private class AgainPlayButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            restartApplication();
-        }
-    }
-
     // methodies for listeners
     private void openOptionsFrame() {
-        OptionsFrame optionsFrame = new OptionsFrame();
-        optionsFrame.setVisible(true);
+        new OptionsFrame();
     }
 
     private void restartApplication() {
         JFrame auswahlfenster = StartFrame.getAuswahlfenster();
         auswahlfenster.setVisible(true);
-    }
-
-    // who won methody
-    private String whoWon() {
-        System.out.println(determineWinner());
-        int winner = determineWinner();
-        if (winner == 1) {
-            return ("Spieler 1 hat gewonnen");
-        } if (winner == 2) {
-            return "Spieler 2 hat gewonnen";
-        } else {
-            return "Unentschieden";
-        }
-    }
-    Board board = new Board();
-    private int determineWinner() {
-        System.out.println(board.getWhoHasWon());
-        return board.getWhoHasWon();
     }
 
 

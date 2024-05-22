@@ -17,6 +17,7 @@ public class StartFrame {
         Auswahlfenster.setTitle("4-Gewinnt");
         Auswahlfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Auswahlfenster.setSize(1000, 500);
+        Auswahlfenster.setResizable(false);
         UIManager.put("Panel.background", Color.WHITE);
         UIManager.put("Button.background", Color.WHITE);
         UIManager.put("Label.background", Color.WHITE);
@@ -38,10 +39,11 @@ public class StartFrame {
         JButton Spieler = new JButton(SpielerImage);
         Spieler.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel();
+            MainPanel mainPanel = new MainPanel(frame);
             frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
+            frame.setResizable(false);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
             Auswahlfenster.dispose();
