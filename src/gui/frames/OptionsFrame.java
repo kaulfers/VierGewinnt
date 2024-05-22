@@ -8,9 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class OptionsFrame extends Frame {
+    MainPanel mainPanel;
     BoardInterface boardInterface;
-    OptionsFrame(){
+    JFrame parentFrame;
+    OptionsFrame(MainPanel mainPanel){
+        this.mainPanel=mainPanel;
         this.boardInterface=boardInterface;
+        this.parentFrame=parentFrame;
         JFrame optionsFrame = new JFrame("Optionen");
 
         JPanel panel = new JPanel();
@@ -52,7 +56,8 @@ class OptionsFrame extends Frame {
                 public void actionPerformed(ActionEvent e) {
                     Integer y_heightNew = Integer.parseInt(heightInput.getText());
                     Integer x_widthNew = Integer.parseInt(widthInput.getText());
-                    
+                    parentFrame.dispose();
+                    new MainPanel(x_widthNew,y_heightNew);
 
                 };
             });
@@ -61,7 +66,7 @@ class OptionsFrame extends Frame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                
+                    //boardInterface.saveBoard();
                 };
             });
 
