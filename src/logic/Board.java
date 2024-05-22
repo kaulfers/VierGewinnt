@@ -584,7 +584,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 			}
 			else{
 
-				spFeld[r][c] = Tile(Character.getNumericValue(ch));
+				spFeld[r][c] = new Tile(Character.getNumericValue(ch));
 				
 				if (c < column-1){
 					c += 1;
