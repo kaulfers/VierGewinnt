@@ -57,8 +57,15 @@ class OptionsFrame extends Frame {
                     Integer y_heightNew = Integer.parseInt(heightInput.getText());
                     Integer x_widthNew = Integer.parseInt(widthInput.getText());
                     parentFrame.dispose();
-                    new MainPanel(x_widthNew,y_heightNew);
 
+                    JFrame frame = new JFrame();
+                    MainPanel mainPanel = new MainPanel(frame, x_widthNew, y_heightNew);
+                    frame.add(mainPanel);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.pack();
+                    frame.setResizable(false);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
                 };
             });
 
@@ -97,6 +104,10 @@ class OptionsFrame extends Frame {
         optionsFrame.setAlwaysOnTop(true);
         optionsFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         optionsFrame.setVisible(true);
+    }
+
+    public OptionsFrame(Runnable runnable, BoardInterface boardInterface, JFrame parentFrame) {
+
     }
 }
 

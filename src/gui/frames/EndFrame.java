@@ -102,7 +102,7 @@ public class EndFrame extends JFrame {
 
     // methodies for listeners
     private void openOptionsFrame() {
-        new OptionsFrame();
+        //new OptionsFrame();
     }
 
     private void restartApplication() {
