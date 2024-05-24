@@ -22,8 +22,8 @@ public class MainPanel extends JPanel {
     private final int SCREEN_HEIGHT = 900;
 
     private int circleDiameter;
-    private final int NUM_COLUMNS = 7;
-    private final int NUM_ROWS = 6;
+    private int NUM_COLUMNS;
+    private int NUM_ROWS;
 
     private final Color COLOR_PLAYER_1 = new Color(218, 114, 116);
     private final Color COLOR_PLAYER_2 = new Color(85, 187, 139);
@@ -61,6 +61,8 @@ public class MainPanel extends JPanel {
     public MainPanel(JFrame parentFrame) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
+        NUM_ROWS=6;
+        NUM_COLUMNS=6;
 
         boardInterface = new Board(NUM_COLUMNS, NUM_ROWS);
 
@@ -72,6 +74,8 @@ public class MainPanel extends JPanel {
     public MainPanel(JFrame parentFrame, int NUM_COLUMNS, int NUM_ROWS) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
+        this.NUM_COLUMNS=NUM_COLUMNS;
+        this.NUM_ROWS=NUM_ROWS;
 
         boardInterface = new Board(NUM_ROWS, NUM_COLUMNS);
 
@@ -285,7 +289,7 @@ public class MainPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OptionsFrame(mainPanel);
+                new OptionsFrame(mainPanel,boardInterface,parentFrame);
             }
         });
     }
