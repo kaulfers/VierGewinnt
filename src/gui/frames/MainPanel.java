@@ -61,8 +61,8 @@ public class MainPanel extends JPanel {
     public MainPanel(JFrame parentFrame) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
-        NUM_ROWS=6;
-        NUM_COLUMNS=6;
+        this.NUM_ROWS=6;
+        this.NUM_COLUMNS=7;
 
         boardInterface = new Board(NUM_COLUMNS, NUM_ROWS);
 
