@@ -22,8 +22,8 @@ public class MainPanel extends JPanel {
     private final int SCREEN_HEIGHT = 900;
 
     private int circleDiameter;
-    private final int NUM_COLUMNS = 13;
-    private final int NUM_ROWS = 16;
+    private final int NUM_COLUMNS = 7;
+    private final int NUM_ROWS = 6;
 
     private final Color COLOR_PLAYER_1 = new Color(218, 114, 116);
     private final Color COLOR_PLAYER_2 = new Color(85, 187, 139);
