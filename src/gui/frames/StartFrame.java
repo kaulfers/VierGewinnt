@@ -39,7 +39,7 @@ public class StartFrame {
         JButton Spieler = new JButton(SpielerImage);
         Spieler.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel(frame);
+            MainPanel mainPanel = new MainPanel(frame, false);
             frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
@@ -53,6 +53,17 @@ public class StartFrame {
         ComputerPanel.setLayout(new FlowLayout());
         ImageIcon ComputerImage = new ImageIcon("res/SpielerVsComputer.png");
         JButton Computer = new JButton(ComputerImage);
+        Computer.addActionListener(e -> {
+            JFrame frame = new JFrame();
+            MainPanel mainPanel = new MainPanel(frame, false);
+            frame.add(mainPanel);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setResizable(false);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            Auswahlfenster.dispose();
+        });
         ComputerPanel.add(Computer);
 
         Spieler.setPreferredSize(new Dimension(400, 120));

@@ -1,5 +1,7 @@
 package gui.frames;
 
+import api.BoardInterface;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +15,15 @@ public class EndFrame extends JFrame {
     private JButton againPlayButton;
     private JButton settingButton;
     private JLabel messageLabel;
+    private MainPanel mainPanelGame;
+    private BoardInterface boardInterfaceGame;
+    private JFrame parentFrameGame;
 
-    public EndFrame(String playerName) {
+    public EndFrame(String playerName, MainPanel mainPanelGame, BoardInterface boardInterfaceGame, JFrame parentFrameGame) {
+        this.parentFrameGame = parentFrameGame;
+        this.boardInterfaceGame = boardInterfaceGame;
+        this.mainPanelGame = mainPanelGame;
+
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new GridBagLayout());
@@ -102,7 +111,7 @@ public class EndFrame extends JFrame {
 
     // methodies for listeners
     private void openOptionsFrame() {
-        //new OptionsFrame();
+        new OptionsFrame(mainPanelGame, boardInterfaceGame, parentFrameGame);
     }
 
     private void restartApplication() {

@@ -30,11 +30,14 @@ class OptionsFrame extends Frame {
         JTextField widthInput= new JTextField("");
         JButton playAgainButton= new JButton("Bestätigen und Neustarten");
 
-        JLabel mistakesLabel= new JLabel("");
-        mistakesLabel.setForeground(Color.RED);
+        JLabel mistakesLabel= new JLabel("",SwingConstants.CENTER);
         JButton saveButton= new JButton("Speichern");
         JButton quitButton= new JButton("Verlassen");
 
+        //Buttons colors
+        mistakesLabel.setForeground(Color.RED);
+
+        //Preparing goBackPanel
         goBackPanel.setLayout(new GridLayout(1,3));
         goBackPanel.add(goBackButton);
         goBackPanel.add(emptyJLabel2);
@@ -54,6 +57,7 @@ class OptionsFrame extends Frame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    final boolean COMPUTER_PLAY_MODE_ENABLED = mainPanel.getComputerPlayMode();
                     //Neue Fenster mit neuer anzahl der Felder wird geöffnet
                     try{
                         int y_heightNew = Integer.parseInt(heightInput.getText());
@@ -62,7 +66,7 @@ class OptionsFrame extends Frame {
                         parentFrame.dispose();
 
                         JFrame frame = new JFrame();
-                        MainPanel mainPanel = new MainPanel(frame, x_widthNew, y_heightNew);
+                        MainPanel mainPanel = new MainPanel(frame,COMPUTER_PLAY_MODE_ENABLED ,x_widthNew, y_heightNew);
                         frame.add(mainPanel);
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.pack();
