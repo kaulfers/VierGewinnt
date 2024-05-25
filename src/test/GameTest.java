@@ -120,7 +120,67 @@ public class GameTest {
         assertEquals(1, board.getWhoHasWon(), "Falscher Gewinner Status");
         assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
     }
-
-
-
+    @RepeatedTest(5)
+    @DisplayName("Test ComputerMove, einfacher Sieg möglich durch setzen in Spalte 4")
+    void testKiGegner1(){
+        board.placeStone(1);                   // Spieler 1
+        board.placeStone(1);                   // Spieler 2
+        board.placeStone(2);                   // Spieler 1
+        board.placeStone(2);                   // Spieler 2
+        board.placeStone(3);                   // Spieler 1
+        board.placeStone(3);                   // Spieler 2
+        board.placeStone(3);                   // Spieler 1
+        board.placeStone(0);                   // Spieler 2
+        board.placeStone(board.getComputerMove());    // PC
+        Tile[][] t = board.getBoard();
+        gameprint(t);
+        assertEquals(1, t[5][4].getStatus(), "PC ist dumm!");
+        assertEquals(1, board.getWhoHasWon(), "Falscher Gewinner Status");
+        assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
+    }
+    // Ausgabe auf der Debug Console
+    void gameprint(Tile[][] t){
+        String s = "Spielfeld: \n";
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 7; j++){
+                s += "| " + t[i][j].getStatus() + " |";
+            }
+            s += "\n";
+        }
+        System.out.println(s);
+    }
+    @RepeatedTest(5)
+    @DisplayName("Test ComputerMove")
+    void testKiGegner2(){
+        board.placeStone(0);                   // Spieler 1
+        board.placeStone(1);                   // Spieler 2
+        board.placeStone(1);                   // Spieler 1
+        board.placeStone(2);                   // Spieler 2
+        board.placeStone(3);                   // Spieler 1
+        board.placeStone(2);                   // Spieler 2
+        board.placeStone(3);                   // Spieler 1
+        board.placeStone(3);                   // Spieler 2
+        board.placeStone(3);                   // Spieler 1
+        board.placeStone(4);                   // Spieler 2
+        board.placeStone(board.getComputerMove());    // PC
+        Tile[][] t = board.getBoard();
+        gameprint(t);
+        assertEquals(1, t[3][2].getStatus(), "PC ist dumm!");
+        assertEquals(1, board.getWhoHasWon(), "Falscher Gewinner Status");
+        assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
+    }
+    @RepeatedTest(5)
+    @DisplayName("Test ComputerMove")
+    void testKiGegner3(){
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove()); 
+        board.placeStone(board.getComputerMove());    // PC
+        Tile[][] t = board.getBoard();
+        gameprint(t);                                 // hier muss man leider im moment selber schauen (Debug-Console)
+        assertEquals(false, board.getIsFull(), "Falscher IsFull Status");
+    }
 }
