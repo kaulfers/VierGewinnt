@@ -30,11 +30,14 @@ class OptionsFrame extends Frame {
         JTextField widthInput= new JTextField("");
         JButton playAgainButton= new JButton("Bestätigen und Neustarten");
 
-        JLabel mistakesLabel= new JLabel("");
-        mistakesLabel.setForeground(Color.RED);
+        JLabel mistakesLabel= new JLabel("",SwingConstants.CENTER);
         JButton saveButton= new JButton("Speichern");
         JButton quitButton= new JButton("Verlassen");
 
+        //Buttons colors
+        mistakesLabel.setForeground(Color.RED);
+
+        //Preparing goBackPanel
         goBackPanel.setLayout(new GridLayout(1,3));
         goBackPanel.add(goBackButton);
         goBackPanel.add(emptyJLabel2);
