@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class StartFrame {
     private static JFrame Auswahlfenster;
@@ -72,6 +75,18 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
+
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("mac")) {
+            aktuellerSpielstand.setForeground(Color.BLACK);
+            aktuellerSpielstandPanel.add(aktuellerSpielstand);
+            aktuellerSpielstand.setBackground(Color.WHITE);
+        } else {
+            aktuellerSpielstand.setForeground(Color.WHITE);
+            aktuellerSpielstandPanel.add(aktuellerSpielstand);
+            aktuellerSpielstand.setBackground(Color.BLUE);
+        }
+
         aktuellerSpielstand.addActionListener(e -> {
             JFrame frame = new JFrame();
             MainPanel mainPanel = new MainPanel(frame, false, true);
@@ -83,9 +98,6 @@ public class StartFrame {
             frame.setVisible(true);
             Auswahlfenster.dispose();
         });
-        aktuellerSpielstand.setForeground(Color.WHITE);
-        aktuellerSpielstandPanel.add(aktuellerSpielstand);
-        aktuellerSpielstand.setBackground(Color.BLUE);
 
         aktuellerSpielstand.setPreferredSize(new Dimension(300, 50));
 

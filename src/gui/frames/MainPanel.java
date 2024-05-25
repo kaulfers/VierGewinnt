@@ -522,14 +522,15 @@ public class MainPanel extends JPanel {
             for (int j = lastRow; j >= 0; j--) {
                 if (myBoard[j][i].getStatus() == 1) {
                     turnPlayer1 = true;
-                    changeColorOfCircleInClickedColumn(i); // i represents the column index
+                    changeColorOfCircleInClickedColumn(i);
                 } else if (myBoard[j][i].getStatus() == 2) {
                     turnPlayer1 = false;
-                    changeColorOfCircleInClickedColumn(i); // i represents the column index
+                    changeColorOfCircleInClickedColumn(i);
                 }
             }
         }
         turnPlayer1 = boardInterface.getTurn();
+        repaint();
     }
 
 
