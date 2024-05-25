@@ -4,6 +4,7 @@ import api.BoardInterface;
 import api.BoardTestInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
 
@@ -250,10 +251,11 @@ public class Board implements BoardInterface,BoardTestInterface {
      * Calculates the next move for the computer player using the minimax algorithm.
      * For better explanation of the algorithm, see the method miniMax.
      * @see #miniMax(Board, int, int, int, int)
-     * @param board Das aktuelle Spielbrett
-     * @return Die Spalte in dem der Token platziert werden soll
+     * @return The column where the computer should place its stone
      */
-    public int getComputerMove(Board board){
+    @Override
+    public int getComputerMove(){
+        Board board = new Board(this);
         int move;
         if (-1 != (move = canMakeWinningMove(board))) {
             return move;
@@ -284,7 +286,7 @@ public class Board implements BoardInterface,BoardTestInterface {
             } else if (board.isFull){
                 return new Result(-1, 0);
             } else {
-                return (new Result(-1, scorePosition(board, maximizingPlayer) + random.nextInt(-10, 10)));
+                return (new Result(-1, scorePosition(board, maximizingPlayer) + random.nextInt(-10, 11)));
             }
         }
         if (maximizingPlayer == (board.isPlayer1sTurn ? 1 : 2)) {
@@ -484,7 +486,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 		
 		for(Tile[] r: this.board){
 			for(Tile c: r){
-				output += c.toString();
+				output += Integer.toString(c.getStatus());
 			}
 		}
 		

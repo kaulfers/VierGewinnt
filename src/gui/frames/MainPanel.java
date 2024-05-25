@@ -5,10 +5,12 @@ import gui.entity.BordersForCircle;
 import gui.entity.Circle;
 import gui.handler.MouseHandler;
 import logic.Board;
+import logic.Tile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -38,6 +40,7 @@ public class MainPanel extends JPanel {
     private boolean createdStorageBox = false;
     private boolean playersSetNames = false;
     private boolean computerPlayMode;
+    private boolean saveGame = false;
 
     private final ArrayList<Circle> CIRCLES = new ArrayList<>();
     private final ArrayList<BordersForCircle> STORAGE_CIRCLES_PLAYER_1 = new ArrayList<>();
@@ -59,26 +62,40 @@ public class MainPanel extends JPanel {
     private JFrame parentFrame;
 
 
-    public MainPanel(JFrame parentFrame, boolean computerPlayMode) {
+    public MainPanel(JFrame parentFrame, boolean computerPlayMode, boolean saveGame) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
         this.computerPlayMode = computerPlayMode;
-        this.NUM_ROWS=6;
-        this.NUM_COLUMNS=7;
+        this.saveGame = saveGame;
 
-        boardInterface = new Board(NUM_COLUMNS, NUM_ROWS);
+        if (!saveGame) {
+            this.NUM_ROWS=7;
+            this.NUM_COLUMNS=7;
+            boardInterface = new Board(NUM_COLUMNS, NUM_ROWS);
+        } else {
+            boardInterface = new Board();
+            boardInterface.overwriteVariableWithSavestats();
+            NUM_COLUMNS = boardInterface.getColumns();
+            NUM_ROWS = boardInterface.getrows();
+        }
+
+
+        if (computerPlayMode) {
+            PLAYER_2_NAME = "Computer";
+        }
 
         this.setBackground(new Color(245, 246, 222, 255));
         this.addMouseListener(new MouseHandler(this));
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-    public MainPanel(JFrame parentFrame, boolean computerPlayMode, int NUM_COLUMNS, int NUM_ROWS) {
+    public MainPanel(JFrame parentFrame, boolean computerPlayMode, int NUM_COLUMNS, int NUM_ROWS, boolean saveGame) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
         this.computerPlayMode = computerPlayMode;
         this.NUM_COLUMNS=NUM_COLUMNS;
         this.NUM_ROWS=NUM_ROWS;
+        this.saveGame = saveGame;
 
         boardInterface = new Board(NUM_ROWS, NUM_COLUMNS);
 
@@ -86,6 +103,7 @@ public class MainPanel extends JPanel {
         this.addMouseListener(new MouseHandler(this));
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
+
 
     private void getNamesFromUser() {
         PLAYER_1_NAME = JOptionPane.showInputDialog(this, "Enter name for Player 1:", "Player 1", JOptionPane.PLAIN_MESSAGE);
@@ -119,7 +137,13 @@ public class MainPanel extends JPanel {
             if (!createdStorageBox) {
                 createLocationsOfCirclesInsideOfStorageBox();
                 createdStorageBox = true;
+
             }
+        }
+
+        if (saveGame) {
+            loadSaveFile();
+            saveGame = false;
         }
 
         renderCircleInStorage(graphics2D);
@@ -408,7 +432,9 @@ public class MainPanel extends JPanel {
                 changeColorOfCircleInClickedColumn(i);
                 checkGameStatus();
                 if (computerPlayMode) {
-                    //changeColorOfCircleInClickedColumn(boardInterface.getComputerMove());
+                    int computerMove = boardInterface.getComputerMove();
+                    changeColorOfCircleInClickedColumn(computerMove);
+                    boardInterface.placeStone(computerMove);
                     checkGameStatus();
                 }
                 break;
@@ -488,8 +514,26 @@ public class MainPanel extends JPanel {
     }
 
     public void loadSaveFile() {
+        Tile[][] myBoard = boardInterface.getBoard();
+        int lastColumn = NUM_COLUMNS - 1;
+        int lastRow = NUM_ROWS - 1;
 
+        for (int i = lastColumn; i >= 0; i--) {
+            for (int j = lastRow; j >= 0; j--) {
+                if (myBoard[j][i].getStatus() == 1) {
+                    turnPlayer1 = true;
+                    changeColorOfCircleInClickedColumn(i);
+                } else if (myBoard[j][i].getStatus() == 2) {
+                    turnPlayer1 = false;
+                    changeColorOfCircleInClickedColumn(i);
+                }
+            }
+        }
+        turnPlayer1 = boardInterface.getTurn();
+        repaint();
     }
+
+
 
     /**
      * Checks if the circle with the specified ID is not yet colored.
