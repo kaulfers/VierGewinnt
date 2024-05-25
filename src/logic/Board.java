@@ -485,7 +485,7 @@ public class Board implements BoardInterface,BoardTestInterface {
 		
 		for(Tile[] r: this.board){
 			for(Tile c: r){
-				output += c.toString();
+				output += Integer.toString(c.getStatus());
 			}
 		}
 		
