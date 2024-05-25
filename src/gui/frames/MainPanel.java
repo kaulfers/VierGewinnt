@@ -481,6 +481,10 @@ public class MainPanel extends JPanel {
         repaint();
     }
 
+    public void loadSaveFile() {
+
+    }
+
     /**
      * Checks if the circle with the specified ID is not yet colored.
      * This method determines whether the circle identified by the given ID
