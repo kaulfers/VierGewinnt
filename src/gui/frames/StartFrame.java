@@ -55,7 +55,7 @@ public class StartFrame {
         JButton Computer = new JButton(ComputerImage);
         Computer.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel(frame, false);
+            MainPanel mainPanel = new MainPanel(frame, true);
             frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();

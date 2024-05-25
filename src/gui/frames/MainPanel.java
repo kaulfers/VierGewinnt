@@ -67,6 +67,9 @@ public class MainPanel extends JPanel {
         this.NUM_COLUMNS=7;
 
         boardInterface = new Board(NUM_COLUMNS, NUM_ROWS);
+        if (computerPlayMode) {
+            PLAYER_2_NAME = "Computer";
+        }
 
         this.setBackground(new Color(245, 246, 222, 255));
         this.addMouseListener(new MouseHandler(this));
@@ -408,7 +411,7 @@ public class MainPanel extends JPanel {
                 changeColorOfCircleInClickedColumn(i);
                 checkGameStatus();
                 if (computerPlayMode) {
-                    //changeColorOfCircleInClickedColumn(boardInterface.getComputerMove());
+                    changeColorOfCircleInClickedColumn(boardInterface.getComputerMove());
                     checkGameStatus();
                 }
                 break;
