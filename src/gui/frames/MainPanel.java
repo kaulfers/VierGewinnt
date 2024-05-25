@@ -37,6 +37,7 @@ public class MainPanel extends JPanel {
     private boolean turnPlayer1 = true;
     private boolean createdStorageBox = false;
     private boolean playersSetNames = false;
+    private boolean computerPlayMode;
 
     private final ArrayList<Circle> CIRCLES = new ArrayList<>();
     private final ArrayList<BordersForCircle> STORAGE_CIRCLES_PLAYER_1 = new ArrayList<>();
@@ -58,9 +59,10 @@ public class MainPanel extends JPanel {
     private JFrame parentFrame;
 
 
-    public MainPanel(JFrame parentFrame) {
+    public MainPanel(JFrame parentFrame, boolean computerPlayMode) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
+        this.computerPlayMode = computerPlayMode;
         this.NUM_ROWS=6;
         this.NUM_COLUMNS=7;
 
@@ -71,9 +73,10 @@ public class MainPanel extends JPanel {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-    public MainPanel(JFrame parentFrame, int NUM_COLUMNS, int NUM_ROWS) {
+    public MainPanel(JFrame parentFrame, boolean computerPlayMode, int NUM_COLUMNS, int NUM_ROWS) {
         this.mainPanel = this;
         this.parentFrame = parentFrame;
+        this.computerPlayMode = computerPlayMode;
         this.NUM_COLUMNS=NUM_COLUMNS;
         this.NUM_ROWS=NUM_ROWS;
 
@@ -164,7 +167,7 @@ public class MainPanel extends JPanel {
         // Render circles for Player 2's storage area
         for (int i = 0; i < amountOfCirclesPlayer2; i++) {
             int SPACE_BETWEEN_CIRCLES = 10;
-            xOfBox = (SCREEN_WIDTH / 2) + ((NUM_COLUMNS * circleDiameter) + ((NUM_COLUMNS - 1) * SPACE_BETWEEN_CIRCLES) / 2);
+            xOfBox = SCREEN_WIDTH - 190;
             int xOfCircle;
             int yOfCircle;
 
@@ -395,7 +398,6 @@ public class MainPanel extends JPanel {
      * Checks if the mouse click corresponds to a specific column on the game board.
      * This method calculates the column based on the mouse click position and
      * determines if it falls within the boundaries of any column.
-     * TODO: check vertically too.
      *
      * @param mouseX The x-coordinate of the mouse click.
      */
@@ -405,6 +407,10 @@ public class MainPanel extends JPanel {
                 boardInterface.placeStone(i);
                 changeColorOfCircleInClickedColumn(i);
                 checkGameStatus();
+                if (computerPlayMode) {
+                    //changeColorOfCircleInClickedColumn(boardInterface.getComputerMove());
+                    checkGameStatus();
+                }
                 break;
             }
         }
@@ -433,7 +439,7 @@ public class MainPanel extends JPanel {
 
         if (gameOverMessage!=null) {
             parentFrame.dispose();
-            new EndFrame(gameOverMessage);
+            new EndFrame(gameOverMessage, mainPanel, boardInterface, parentFrame);
         }
     }
 
@@ -481,6 +487,10 @@ public class MainPanel extends JPanel {
         repaint();
     }
 
+    public void loadSaveFile() {
+
+    }
+
     /**
      * Checks if the circle with the specified ID is not yet colored.
      * This method determines whether the circle identified by the given ID
@@ -495,5 +505,9 @@ public class MainPanel extends JPanel {
             if (circle.getID() == id && circle.getColor().equals(Color.WHITE)) return true;
         }
         return false;
+    }
+
+    public boolean getComputerPlayMode() {
+        return computerPlayMode;
     }
 }
