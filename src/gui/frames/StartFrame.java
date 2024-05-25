@@ -39,7 +39,7 @@ public class StartFrame {
         JButton Spieler = new JButton(SpielerImage);
         Spieler.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel(frame, false);
+            MainPanel mainPanel = new MainPanel(frame, false, false);
             frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
@@ -55,7 +55,7 @@ public class StartFrame {
         JButton Computer = new JButton(ComputerImage);
         Computer.addActionListener(e -> {
             JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel(frame, true);
+            MainPanel mainPanel = new MainPanel(frame, true, false);
             frame.add(mainPanel);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.pack();
@@ -72,6 +72,17 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
+        aktuellerSpielstand.addActionListener(e -> {
+            JFrame frame = new JFrame();
+            MainPanel mainPanel = new MainPanel(frame, false, true);
+            frame.add(mainPanel);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setResizable(false);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            Auswahlfenster.dispose();
+        });
         aktuellerSpielstand.setForeground(Color.WHITE);
         aktuellerSpielstandPanel.add(aktuellerSpielstand);
         aktuellerSpielstand.setBackground(Color.BLUE);

@@ -66,7 +66,7 @@ class OptionsFrame extends Frame {
                         parentFrame.dispose();
 
                         JFrame frame = new JFrame();
-                        MainPanel mainPanel = new MainPanel(frame,COMPUTER_PLAY_MODE_ENABLED ,x_widthNew, y_heightNew);
+                        MainPanel mainPanel = new MainPanel(frame,COMPUTER_PLAY_MODE_ENABLED ,x_widthNew, y_heightNew, false);
                         frame.add(mainPanel);
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.pack();
@@ -93,7 +93,7 @@ class OptionsFrame extends Frame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    optionsFrame.dispose();
+                    System.exit(0);
                 }
             });
 

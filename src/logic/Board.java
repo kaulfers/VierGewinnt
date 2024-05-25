@@ -4,6 +4,7 @@ import api.BoardInterface;
 import api.BoardTestInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
 
