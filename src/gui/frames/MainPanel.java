@@ -411,7 +411,9 @@ public class MainPanel extends JPanel {
                 changeColorOfCircleInClickedColumn(i);
                 checkGameStatus();
                 if (computerPlayMode) {
-                    changeColorOfCircleInClickedColumn(boardInterface.getComputerMove());
+                    int computerMove = boardInterface.getComputerMove();
+                    changeColorOfCircleInClickedColumn(computerMove);
+                    boardInterface.placeStone(computerMove);
                     checkGameStatus();
                 }
                 break;
