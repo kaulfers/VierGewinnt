@@ -285,7 +285,7 @@ public class Board implements BoardInterface,BoardTestInterface {
             } else if (board.isFull){
                 return new Result(-1, 0);
             } else {
-                return (new Result(-1, scorePosition(board, maximizingPlayer) + random.nextInt(-10, 10)));
+                return (new Result(-1, scorePosition(board, maximizingPlayer) + random.nextInt(-10, 11)));
             }
         }
         if (maximizingPlayer == (board.isPlayer1sTurn ? 1 : 2)) {
