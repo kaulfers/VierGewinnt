@@ -1,7 +1,6 @@
 package gui.frames;
 
 import api.BoardInterface;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -82,7 +81,7 @@ class OptionsFrame extends Frame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //boardInterface.saveBoard();
+                    boardInterface.saveBoard();
                 }
             });
 
