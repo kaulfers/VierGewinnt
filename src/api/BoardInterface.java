@@ -7,6 +7,6 @@ public interface BoardInterface {
     boolean getIsFull();
     int getWhoHasWon(); //0: niemand     1: Spieler1     2:Spieler2
     void saveBoard();
-    int getComputerMove(Board board);
+    int getComputerMove();
     // sagt uns falls ihr noch was braucht
 }

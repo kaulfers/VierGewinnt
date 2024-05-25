@@ -250,10 +250,11 @@ public class Board implements BoardInterface,BoardTestInterface {
      * Calculates the next move for the computer player using the minimax algorithm.
      * For better explanation of the algorithm, see the method miniMax.
      * @see #miniMax(Board, int, int, int, int)
-     * @param board Das aktuelle Spielbrett
-     * @return Die Spalte in dem der Token platziert werden soll
+     * @return The column where the computer should place its stone
      */
-    public int getComputerMove(Board board){
+    @Override
+    public int getComputerMove(){
+        Board board = new Board(this);
         int move;
         if (-1 != (move = canMakeWinningMove(board))) {
             return move;
