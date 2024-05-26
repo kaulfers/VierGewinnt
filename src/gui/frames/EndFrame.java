@@ -1,7 +1,5 @@
 package gui.frames;
 
-import api.BoardInterface;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -15,15 +13,8 @@ public class EndFrame extends JFrame {
     private JButton againPlayButton;
     private JButton settingButton;
     private JLabel messageLabel;
-    private MainPanel mainPanelGame;
-    private BoardInterface boardInterfaceGame;
-    private JFrame parentFrameGame;
 
-    public EndFrame(String playerName, MainPanel mainPanelGame, BoardInterface boardInterfaceGame, JFrame parentFrameGame) {
-        this.parentFrameGame = parentFrameGame;
-        this.boardInterfaceGame = boardInterfaceGame;
-        this.mainPanelGame = mainPanelGame;
-
+    public EndFrame(String playerName) {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new GridBagLayout());
@@ -45,7 +36,7 @@ public class EndFrame extends JFrame {
                 BorderFactory.createEmptyBorder(),
                 new EmptyBorder(15, 10, 18, 10)
         ));
-        Font newFont = new Font("Arial", Font.BOLD, 24);
+        Font newFont = new Font("American Typewriter", Font.ITALIC, 24);
         messageLabel.setFont(newFont);
         messageLabel.setOpaque(false);
 
@@ -56,11 +47,13 @@ public class EndFrame extends JFrame {
         // Buttons
         Dimension btnSize = new Dimension(120, 35);
         Border grayBorder = new LineBorder(Color.GRAY, 1, true);
+        Font btnFont = new Font("Tahoma", Font.PLAIN, 14);
 
         closeButton = new JButton("Verlassen");
         closeButton.addActionListener(new CloseButtonListener());
         closeButton.setPreferredSize(btnSize);
         closeButton.setBorder(grayBorder);
+        closeButton.setFont(btnFont);
 
         againPlayButton = new JButton("Neustarten");
         againPlayButton.addActionListener(e -> {
@@ -69,11 +62,13 @@ public class EndFrame extends JFrame {
         });
         againPlayButton.setPreferredSize(btnSize);
         againPlayButton.setBorder(grayBorder);
+        againPlayButton.setFont(btnFont);
 
         settingButton = new JButton("Einstellungen");
         settingButton.addActionListener(new SettingButtonListener());
         settingButton.setPreferredSize(btnSize);
         settingButton.setBorder(grayBorder);
+        settingButton.setFont(btnFont);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
@@ -111,7 +106,7 @@ public class EndFrame extends JFrame {
 
     // methodies for listeners
     private void openOptionsFrame() {
-        new OptionsFrame(mainPanelGame, boardInterfaceGame, parentFrameGame);
+        new OptionsFrame();
     }
 
     private void restartApplication() {

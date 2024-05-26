@@ -10,29 +10,37 @@ class OptionsFrame extends Frame {
     MainPanel mainPanel;
     BoardInterface boardInterface;
     JFrame parentFrame;
-    OptionsFrame(MainPanel mainPanel,BoardInterface boardInterface, JFrame parentFrame){
+    OptionsFrame(){
         this.mainPanel=mainPanel;
         this.boardInterface=boardInterface;
         this.parentFrame=parentFrame;
         JFrame optionsFrame = new JFrame("Optionen");
+        Font mainFont = new Font("Arial", Font.BOLD, 18);
+        Font btnFont = new Font("Tahoma", Font.PLAIN, 15);
 
         JPanel panel = new JPanel();
 
         JPanel goBackPanel = new JPanel();
         JButton goBackButton= new JButton("Zurück");
+        goBackButton.setFont(btnFont);
         JLabel emptyJLabel2 = new JLabel("");
         JLabel emptyJLabel3 = new JLabel("");
 
-        JLabel height = new JLabel("Hoehe");
+        JLabel height = new JLabel(" Hoehe");
+        height.setFont(mainFont);
         JTextField heightInput= new JTextField("");
 
-        JLabel width = new JLabel("Breite");
+        JLabel width = new JLabel(" Breite");
+        width.setFont(mainFont);
         JTextField widthInput= new JTextField("");
         JButton playAgainButton= new JButton("Bestätigen und Neustarten");
+        playAgainButton.setFont(btnFont);
 
         JLabel mistakesLabel= new JLabel("",SwingConstants.CENTER);
         JButton saveButton= new JButton("Speichern");
+        saveButton.setFont(btnFont);
         JButton quitButton= new JButton("Verlassen");
+        quitButton.setFont(btnFont);
 
         //Buttons colors
         mistakesLabel.setForeground(Color.RED);

@@ -10,7 +10,6 @@ import logic.Tile;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -316,7 +315,7 @@ public class MainPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OptionsFrame(mainPanel,boardInterface,parentFrame);
+                new OptionsFrame();
             }
         });
     }
@@ -340,7 +339,7 @@ public class MainPanel extends JPanel {
         }
 
         // Set up font and color for the label
-        graphics2D.setFont(new Font("Arial", Font.BOLD, 24));
+        graphics2D.setFont(new Font("American Typewriter", Font.PLAIN, 24));
         graphics2D.setColor(Color.BLACK);
 
         // Draw the label
@@ -465,7 +464,7 @@ public class MainPanel extends JPanel {
 
         if (gameOverMessage!=null) {
             parentFrame.dispose();
-            new EndFrame(gameOverMessage, mainPanel, boardInterface, parentFrame);
+            new EndFrame(gameOverMessage);
         }
     }
 

@@ -1,13 +1,7 @@
 package gui.frames;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -75,6 +69,8 @@ public class StartFrame {
         JPanel aktuellerSpielstandPanel = new JPanel();
         aktuellerSpielstandPanel.setLayout(new FlowLayout());
         JButton aktuellerSpielstand = new JButton("letzter Spielstand laden");
+        Font mainFont = new Font("American Typewriter", Font.PLAIN, 16);
+        aktuellerSpielstand.setFont(mainFont);
 
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("mac")) {
