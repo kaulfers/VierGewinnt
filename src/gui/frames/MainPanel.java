@@ -26,8 +26,8 @@ public class MainPanel extends JPanel {
     private int NUM_COLUMNS;
     private int NUM_ROWS;
 
-    private final Color COLOR_PLAYER_1 = new Color(218, 114, 116);
-    private final Color COLOR_PLAYER_2 = new Color(85, 187, 139);
+    private final Color COLOR_PLAYER_1 = new Color(69, 147, 175);
+    private final Color COLOR_PLAYER_2 = new Color(218, 114, 116);
 
     private String PLAYER_1_NAME = "Spieler 1";
     private String PLAYER_2_NAME = "Spieler 2";
@@ -400,7 +400,7 @@ public class MainPanel extends JPanel {
         centerX = (getWidth() - GAME_BOARD_WIDTH) / 2;
         centerY = (getHeight() - GAME_BOARD_HEIGHT) / 2;
 
-        graphics2D.setColor(new Color(69, 147, 175));
+        graphics2D.setColor(new Color(85, 187, 139));
         graphics2D.fillRoundRect(centerX, centerY, GAME_BOARD_WIDTH, GAME_BOARD_HEIGHT, GAME_BOEARD_ARC, GAME_BOEARD_ARC);
     }
 
