@@ -315,7 +315,7 @@ public class MainPanel extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new OptionsFrame();
+                new OptionsFrame(mainPanel,boardInterface,parentFrame);
             }
         });
     }
@@ -464,7 +464,7 @@ public class MainPanel extends JPanel {
 
         if (gameOverMessage!=null) {
             parentFrame.dispose();
-            new EndFrame(gameOverMessage);
+            new EndFrame(gameOverMessage, mainPanel, boardInterface, parentFrame);
         }
     }
 

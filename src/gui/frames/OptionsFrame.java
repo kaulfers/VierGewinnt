@@ -10,7 +10,7 @@ class OptionsFrame extends Frame {
     MainPanel mainPanel;
     BoardInterface boardInterface;
     JFrame parentFrame;
-    OptionsFrame(){
+    OptionsFrame(MainPanel mainPanel,BoardInterface boardInterface, JFrame parentFrame){
         this.mainPanel=mainPanel;
         this.boardInterface=boardInterface;
         this.parentFrame=parentFrame;
