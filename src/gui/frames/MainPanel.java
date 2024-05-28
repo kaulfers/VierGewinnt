@@ -21,6 +21,7 @@ import java.util.Random;
 public class MainPanel extends JPanel {
     private final int SCREEN_WIDTH = 1300;
     private final int SCREEN_HEIGHT = 900;
+    private static final int DELAY_BEFORE_CLOSE = 1000;
 
     private int circleDiameter;
     private int NUM_COLUMNS;
@@ -463,10 +464,16 @@ public class MainPanel extends JPanel {
         }
 
         if (gameOverMessage!=null) {
-            parentFrame.dispose();
-            new EndFrame(gameOverMessage, mainPanel, boardInterface, parentFrame);
+            String finalGameOverMessage = gameOverMessage;
+            Timer timer = new Timer(DELAY_BEFORE_CLOSE, (e) -> {
+                parentFrame.dispose();
+                new EndFrame(finalGameOverMessage, mainPanel, boardInterface, parentFrame);
+            });
+            timer.setRepeats(false); // Make the timer fire only once
+            timer.start(); // Start the timer
         }
     }
+
 
     /**
      * This method could not be permanent, if we consider implementing a drag-and-drop feature.
@@ -528,7 +535,7 @@ public class MainPanel extends JPanel {
                 }
             }
         }
-        turnPlayer1 = boardInterface.getTurn();
+        turnPlayer1 = !boardInterface.getTurn();
         repaint();
     }
 

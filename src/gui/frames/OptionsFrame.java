@@ -93,6 +93,11 @@ class OptionsFrame extends Frame {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    if (mainPanel.getComputerPlayMode()) {
+                        boardInterface.savePvP(true);
+                    } else {
+                        boardInterface.savePvP(false);
+                    }
                     boardInterface.saveBoard();
                 }
             });

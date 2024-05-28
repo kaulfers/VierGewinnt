@@ -1,5 +1,8 @@
 package gui.frames;
 
+import api.BoardInterface;
+import logic.Board;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.GridBagConstraints;
@@ -84,15 +87,28 @@ public class StartFrame {
         }
 
         aktuellerSpielstand.addActionListener(e -> {
-            JFrame frame = new JFrame();
-            MainPanel mainPanel = new MainPanel(frame, false, true);
-            frame.add(mainPanel);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setResizable(false);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            Auswahlfenster.dispose();
+            BoardInterface boardInterface = new Board();
+            if (boardInterface.loadPvP()) {
+                JFrame frame = new JFrame();
+                MainPanel mainPanel = new MainPanel(frame, true, true);
+                frame.add(mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                Auswahlfenster.dispose();
+            } else {
+                JFrame frame = new JFrame();
+                MainPanel mainPanel = new MainPanel(frame, false, true);
+                frame.add(mainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setResizable(false);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                Auswahlfenster.dispose();
+            }
         });
 
         aktuellerSpielstand.setPreferredSize(new Dimension(300, 50));
