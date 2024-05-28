@@ -9,6 +9,8 @@ public interface BoardTestInterface {
     int getWhoHasWon(); //0: niemand     1: Spieler1     2:Spieler2
     void saveBoard(); //speichert das Board als String in eine Textdatei
     void overwriteVariableWithSavestats(); //übernimmt die Werte aus dem savefile(Werte, die angepasst werden:board,isFull,isPlayer1sTurn)
+    void savePvP(boolean pvp); // pvp = true wenn Player gegen Player, und = false bei Player gegen Computer 
+    boolean loadPvP();
     int getComputerMove();
     boolean getTurn(); // gibt den Spieler der am Zug ist wieder (True = Spieler1, False = Spieler2)
     Tile[][] getBoard(); // gibt das Spielfeld als 2-dimensionalem Array aus Kacheln(Tiles) wieder

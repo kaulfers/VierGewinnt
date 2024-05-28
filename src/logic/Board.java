@@ -390,6 +390,59 @@ public class Board implements BoardInterface,BoardTestInterface {
         return possibleMoves;
     }
 
+        public void savePvP(boolean pvp){
+        int temp;
+        if(pvp){
+            temp = 1; 
+        }else{
+            temp = 0;
+        }
+        
+        FileOutputStream out = null;
+		try{
+			out = new FileOutputStream("PvP.data");
+			out.write(temp);
+		}catch(Throwable t){
+			System.out.println("Exception in board.savePvP");
+			t.printStackTrace();
+		}
+		finally{
+			if(out != null){
+				try{
+				out.close();
+				}catch(IOException e){
+					System.out.println("Exception in board.savePvP");
+					e.printStackTrace();
+				}
+			}
+		}
+    }
+
+    public boolean loadPvP(){
+        FileInputStream in = null;
+        int temp = -1;
+        boolean ret = false;
+		try{
+			in = new FileInputStream("PvP.data");
+			temp = in.read();
+            if(temp == 0){ret = false;} else if(temp == 1) {ret = true;}
+    	}catch(Throwable t){
+			System.out.println("Exception in board.loadPvP");
+			t.printStackTrace();
+		}
+		finally{
+			if(in != null){
+				try{
+				in.close();
+				}catch(IOException e){
+					System.out.println("Exception in board.loadPvP");
+					e.printStackTrace();
+				}
+			}
+		}
+        return ret;
+    }
+
     /**
      * Saves the Board-Class with all their variables in a textfile.
      * There can only be one savecode in the savefile.
